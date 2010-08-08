@@ -14,6 +14,14 @@ class Page < ActiveRecord::Base
 
   has_attached_file :comic
 
+  def self.latest
+    published.descend_by_published_at.first
+  end
+
+  named_scope :published, lambda {
+    { :conditions => ['published_at <= ?', Time.now] }
+  }
+
   # --- Permissions --- #
 
   def create_permitted?

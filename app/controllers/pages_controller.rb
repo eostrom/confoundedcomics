@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   auto_actions
 
   def show
-    @page = Page.last
+    @page = Page.latest
     render :show
   end
 end
