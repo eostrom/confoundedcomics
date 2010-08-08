@@ -14,3 +14,4 @@ doc/plugins
 doc/*.dot
 coverage/*
 db/*.sqlite3
+app/views/taglibs/auto/**/*.dryml
