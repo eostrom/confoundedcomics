@@ -12,6 +12,8 @@ class Page < ActiveRecord::Base
   belongs_to :book
   validates_presence_of :book, :title
 
+  has_attached_file :comic
+
   # --- Permissions --- #
 
   def create_permitted?

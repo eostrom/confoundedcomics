@@ -8,3 +8,9 @@
 <set-theme name="clean"/>
 
 <def tag="app-name">Comics</def>
+
+<extend tag="form" for="Page">
+  <old-form merge multipart>
+    <field-list: fields="comic, title, commentary, published_at, book"/>
+  </old-form>
+</extend>

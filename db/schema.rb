@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100808031819) do
+ActiveRecord::Schema.define(:version => 20100808044111) do
 
   create_table "books", :force => true do |t|
     t.string   "title"
@@ -26,6 +26,10 @@ ActiveRecord::Schema.define(:version => 20100808031819) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "book_id"
+    t.string   "comic_file_name"
+    t.string   "comic_content_type"
+    t.integer  "comic_file_size"
+    t.datetime "comic_updated_at"
   end
 
   add_index "pages", ["book_id"], :name => "index_pages_on_book_id"
