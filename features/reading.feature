@@ -3,6 +3,14 @@ Feature: Reading comics!
   A comics fan
   wants to read comics
 
+  Scenario: Read a page
+    Given the following pages exist:
+        | Title  | Commentary       | Published At | Book          |
+        | Page 1 | The first page.  |   2010-08-01 | Title: Book 1 |
+     When I go to the page "Page 1"
+     Then I should see "The first page."
+      And the page title should be "Book 1 - Confounded Contraption"
+
   Scenario: Browse sequentially
     Given the following pages exist:
         | Title  | Commentary       | Published At | Book          |

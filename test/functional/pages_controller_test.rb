@@ -3,11 +3,20 @@ require 'test_helper'
 class PagesControllerTest < ActionController::TestCase
   context 'show' do
     setup do
-      @page1 = Factory.create(:page, :published_at => 2.days.ago)
-      @page2 = Factory.create(:page, :published_at => 1.day.ago)
+      @book = Factory.create(:book, :title => 'A Book')
+      @page1 = Factory.create(:page,
+        :published_at => 2.days.ago, :book => @book)
+      @page2 = Factory.create(:page,
+        :published_at => 1.day.ago, :book => @book)
 
       @params = {}
       @action = lambda { get :show, @params }
+    end
+
+    should 'include the book title in the title element' do
+      @action.call
+
+      assert_select('title', 'A Book - Confounded Contraption')
     end
 
     context 'given no page ID' do
