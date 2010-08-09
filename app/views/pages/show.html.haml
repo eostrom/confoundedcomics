@@ -59,8 +59,10 @@
                   = image_tag(@page.comic.url, :alt => @page.title)
               %br/
               %center
+                = first_page_link(@page)
                 = previous_page_link(@page)
                 = next_page_link(@page)
+                = last_page_link(@page)
                 %br/
                 %a{:href => "http://www.topatoco.com/merchant.mvc?Screen=PROD&Store_Code=TO&Product_Code=BEAT-COMICPRINT&Product_Attributes[1]:value=http%3A%2F%2Fwww.harkavagrant.com%2Findex.php%3Fid%3D275", :style => "font-size:12px;"} buy this print!
               /

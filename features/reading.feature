@@ -19,13 +19,21 @@ Feature: Reading comics!
         | Page 2 | The second page. |   2010-08-02 | Title: Book 1 |
      When I go to the home page
      Then I should see "The third page."
-      And I should not see "Next"
+      And "Next" should not be a link
+      And "Last" should not be a link
      When I follow "Previous"
      Then I should be on the page "Page 2"
 
      When I follow "Previous"
      Then I should be on the page "Page 1"
-      And I should not see "Previous."
+      And "Previous" should not be a link
+      And "First" should not be a link
 
      When I follow "Next"
      Then I should be on the page "Page 2"
+
+     When I follow "First"
+     Then I should be on the page "Page 1"
+
+     When I follow "Last"
+     Then I should be on the page "Page 3"

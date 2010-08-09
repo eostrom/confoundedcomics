@@ -22,6 +22,11 @@ class Page < ActiveRecord::Base
     { :conditions => ['published_at > ?', start] }
   }
 
+  def first_predecessor
+    # TODO: book.pages
+    Page.published.before(self).find(:first, :order => 'published_at ASC')
+  end
+
   def previous
     return nil if !published_at
 
@@ -34,6 +39,11 @@ class Page < ActiveRecord::Base
 
     # TODO: book.pages
     Page.published.after(self).find(:first, :order => 'published_at ASC')
+  end
+
+  def last_successor
+    # TODO: book.pages
+    Page.published.after(self).find(:first, :order => 'published_at DESC')
   end
 
   has_attached_file :comic
