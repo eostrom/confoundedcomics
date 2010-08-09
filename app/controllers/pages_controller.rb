@@ -4,7 +4,8 @@ class PagesController < ApplicationController
   auto_actions
 
   def show
-    @page = Page.latest
+    @page = params[:id] ? Page.published.find(params[:id]) : Page.latest
+
     render :show
   end
 end

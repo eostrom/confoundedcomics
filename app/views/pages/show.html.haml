@@ -66,12 +66,10 @@
                   = image_tag(@page.comic.url, :alt => @page.title)
               %br/
               %center
-                %a{:border => "0", :href => "http://www.harkavagrant.com/index.php?id=274", :style => "text-decoration: none"}
-                  %img{:border => "0", :src => "http://www.harkavagrant.com/buttonprevious.png"}/
+                = previous_page_link(@page)
                 %a{:href => "index.php?id=188"}
                   %img{:border => "0", :src => "http://www.harkavagrant.com/buttonrandom.png"}/
-                %a{:href => "http://www.harkavagrant.com/index.php?id=275", :style => "text-decoration: none"}
-                  %img{:border => "0", :src => "http://www.harkavagrant.com/buttonnext.png"}/
+                = next_page_link(@page)
                 %br/
                 %a{:href => "http://www.topatoco.com/merchant.mvc?Screen=PROD&Store_Code=TO&Product_Code=BEAT-COMICPRINT&Product_Attributes[1]:value=http%3A%2F%2Fwww.harkavagrant.com%2Findex.php%3Fid%3D275", :style => "font-size:12px;"} buy this print!
               /

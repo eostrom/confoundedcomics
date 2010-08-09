@@ -27,5 +27,6 @@ config.action_mailer.delivery_method = :test
 # like if you have constraints or database-specific column types
 # config.active_record.schema_format = :sql
 
+config.gem 'mocha', :version => '~> 0.9.8'
 config.gem 'factory_girl', :version => '~> 1.3.2'
-config.gem 'shoulda'
+config.gem 'shoulda', :version => '~> 2.11.3'
