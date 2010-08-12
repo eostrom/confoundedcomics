@@ -16,3 +16,4 @@ coverage/*
 db/*.sqlite3
 app/views/taglibs/auto/**/*.dryml
 app/views/taglibs/auto/*/*/*.dryml
+capybara-*.html
