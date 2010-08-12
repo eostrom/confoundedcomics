@@ -1,0 +1,127 @@
+%html
+  %head
+    /
+      Template ripped off from the wonderful Hark, A Vagrant!
+      http://www.harkavagrant.com/
+
+    %title TK
+    :css
+      .black9 {font-family: times; font-size: 9pt; color: #000000; padding: 5px;}
+      .black11 {font-family: times; font-size: 12pt; color: #000000; padding: 15px; text-align: left;}
+    -# tk %link{:href => "http://www.rsspect.com/rss/TK.xml", :rel => "alternate", :title => "RSS feed for TK", :type => "application/rss+xml"}/
+  /
+    :javascript
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    :javascript
+      try {
+      var pageTracker = _gat._getTracker("UA-2754958-2");
+      pageTracker._trackPageview();
+      } catch(err) {}
+  %body{:alink => "black", :bgcolor => "white", :leftmargin => "5", :link => "black", :marginheight => "5", :marginwidth => "5", :topmargin => "5", :vlink => "black"}
+    %div{:align => "center"}
+      -#
+        TK
+        / Beginning of Project Wonderful ad code:
+        / Ad box ID: 35716
+        %script{:src => "http://www.projectwonderful.com/ad_display.js", :type => "text/javascript"}
+        %noscript
+          %map#admap35716{:name => "admap35716"}
+            %area{:alt => "", :coords => "0,0,728,90", :href => "http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=35716&amp;type=5", :shape => "rect", :target => "_blank", :title => ""}/
+          %table{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "728"}
+            %tr
+              %td
+                %img{:alt => "", :border => "0", :height => "90", :src => "http://www.projectwonderful.com/nojs.php?id=35716&amp;type=5", :usemap => "#admap35716", :width => "728"}/
+            %tr
+              %td{:bgcolor => "#ffffff", :colspan => "1"}
+                %center
+                  %a{:href => "http://www.projectwonderful.com/advertisehere.php?id=35716&amp;type=5", :style => "font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;", :target => "_blank"} Ads by Project Wonderful!  Your ad here, right now: $0
+        / End of Project Wonderful ad code.
+      / -- about our story's heroes -
+      %center
+        %a{:href => "about.php"}
+          %img{:border => "0", :src => "buttonabout.png"}/
+        %a{:href => "http://www.topatoco.com/merchant.mvc?Screen=CTGY&Store_Code=TO&Category_Code=BEAT"}
+          %img{:border => "0", :src => "buttonstore.png"}/
+        %a{:href => "index.php"}
+          %img{:border => "0", :src => "vagrantheader.png"}/
+        %a{:href => "archive.php"}
+          %img{:border => "0", :src => "buttonarchive.png"}/
+        %a{:href => "archivecat.php"}
+          %img{:border => "0", :src => "buttonarchivebycategory.png"}/
+      %br/
+      %center
+        %table{:cell => "", :padding => "3"}
+          %tr
+            %td{:colspan => "2"}
+              %center
+                %a{:border => "0", :href => "http://www.harkavagrant.com/index.php?id=274", :style => "text-decoration: none"}
+                  %img{:border => "0", :src => "buttonprevious.png"}/
+                %a{:href => "index.php?id=188"}
+                  %img{:border => "0", :src => "buttonrandom.png"}/
+                %a{:href => "http://www.harkavagrant.com/index.php?id=275", :style => "text-decoration: none"}
+                  %img{:border => "0", :src => "buttonnext.png"}/
+                %br/
+                %span.rss-content
+                  = image_tag(@page.comic.url, :alt => @page.title)
+              %br/
+              %center
+                %a{:border => "0", :href => "http://www.harkavagrant.com/index.php?id=274", :style => "text-decoration: none"}
+                  %img{:border => "0", :src => "http://www.harkavagrant.com/buttonprevious.png"}/
+                %a{:href => "index.php?id=188"}
+                  %img{:border => "0", :src => "http://www.harkavagrant.com/buttonrandom.png"}/
+                %a{:href => "http://www.harkavagrant.com/index.php?id=275", :style => "text-decoration: none"}
+                  %img{:border => "0", :src => "http://www.harkavagrant.com/buttonnext.png"}/
+                %br/
+                %a{:href => "http://www.topatoco.com/merchant.mvc?Screen=PROD&Store_Code=TO&Product_Code=BEAT-COMICPRINT&Product_Attributes[1]:value=http%3A%2F%2Fwww.harkavagrant.com%2Findex.php%3Fid%3D275", :style => "font-size:12px;"} buy this print!
+              /
+                <span class="rss-title">Hark, a Vagrant: X-Men, Wonder Woman</span>
+
+                <span class="rss-link">http://www.harkavagrant.com/index.php?id=275</span>
+
+                <span class="rss-id">http://www.harkavagrant.com/index.php?id=275</span>
+
+                <span class="rss-content"><P></span>
+          %tr
+            %td{:bgcolor => "grey", :valign => "top", :width => "500"}
+              %table{:align => "left", :border => "0", :cellpadding => "8", :cellspacing => "0"}
+                %tr
+                  %td{:align => "center", :valign => "top"}
+                    %img{:src => "kateicon.png"}/
+                    %font{:face => "verdana", :size => "-2"}
+                      %br/
+                      %a{:href => "about.php"} Kate Beaton
+              .black11
+                %div.rss-content
+                  = simple_format(@page.commentary)
+              / extra page content table - links etc
+              %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "500"}
+                %tr
+                  %td{:valign => "top"}/
+                %tr
+              .black9{:align => "center"}
+                %a{:href => "http://beatonna.livejournal.com/"} Livejournal
+                \/
+                %a{:href => "http://www.voxel.net/industry/content-publishers?utm_source=harkavagrant&utm_medium=footer_link&utm_campaign=HarkaVagrant.com%2BSponsorship", :target => "_blank"} Cloud Hosting by Voxel
+        / end of extra page content
+        %td
+        -#
+          TK
+          / Beginning of Project Wonderful ad code:
+          / Ad box ID: 35717
+          %script{:src => "http://www.projectwonderful.com/ad_display.js", :type => "text/javascript"}
+          %noscript
+            %map#admap35717{:name => "admap35717"}
+              %area{:alt => "", :coords => "0,0,160,600", :href => "http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=35717&amp;type=3", :shape => "rect", :target => "_blank", :title => ""}/
+            %table{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "160"}
+              %tr
+                %td
+                  %img{:alt => "", :border => "0", :height => "600", :src => "http://www.projectwonderful.com/nojs.php?id=35717&amp;type=3", :usemap => "#admap35717", :width => "160"}/
+              %tr
+                %td{:bgcolor => "#ffffff", :colspan => "1"}
+                  %center
+                    %a{:href => "http://www.projectwonderful.com/advertisehere.php?id=35717&amp;type=3", :style => "font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;", :target => "_blank"} Ads by Project Wonderful!  Your ad here, right now: $0
+              %tr
+                %td{:bgcolor => "#000000", :colspan => "1", :style => "height:3px;font-size:1px;padding:0px;max-height:3px;", :valign => "top", :width => "160"}
+          / End of Project Wonderful ad code.
+        All content (c)2006-2010 Kate Beaton
