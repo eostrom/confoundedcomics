@@ -27,3 +27,9 @@
     <field-list: fields="comic, title, commentary, published_at, book"/>
   </old-form>
 </extend>
+
+<extend tag="form" for="Book">
+  <old-form merge multipart>
+    <field-list: fields="banner, title, description, published_at"/>
+  </old-form>
+</extend>

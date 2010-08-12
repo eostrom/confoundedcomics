@@ -5,6 +5,7 @@ class PagesController < ApplicationController
 
   def show
     @page = params[:id] ? Page.published.find(params[:id]) : Page.latest
+    @book = @page.book
 
     render :show
   end

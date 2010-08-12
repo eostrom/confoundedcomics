@@ -9,8 +9,10 @@ class Book < ActiveRecord::Base
     timestamps
   end
 
-  has_many :pages
+  has_many :pages, :order => 'published_at ASC'
   validates_presence_of :title
+
+  has_attached_file :banner
 
   # --- Permissions --- #
 

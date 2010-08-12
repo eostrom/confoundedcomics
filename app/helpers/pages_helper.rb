@@ -1,4 +1,11 @@
 module PagesHelper
+  def banner_link(book)
+    if book.banner?
+      link_to(image_tag(book.banner.url, :alt => book.title),
+        book.pages.latest)
+    end
+  end
+
   def maybe_link(name, url, *args)
     if url
       link_to(name, url, *args)

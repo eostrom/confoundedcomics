@@ -1,0 +1,5 @@
+<show-page>
+  <prepend-content-body:>
+    <%= image_tag(@book.banner.url) %>
+  </prepend-content-body:>
+</show-page>
