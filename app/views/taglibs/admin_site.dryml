@@ -1,0 +1,29 @@
+<!-- Tag definitions for the Admin subsite -->
+
+<include src="rapid" plugin="hobo"/>
+<include src="paperclip" plugin="paperclip_with_hobo"/>
+
+<include src="taglibs/auto/admin/rapid/cards"/>
+<include src="taglibs/auto/admin/rapid/pages"/>
+<include src="taglibs/auto/admin/rapid/forms"/>
+
+<set-theme name="clean"/>
+
+<def tag="app-name">Comics - Admin</def>
+
+<extend tag="page">
+  <old-page merge>
+    <append-stylesheets:>
+      <stylesheet name="admin"/>
+    </append-stylesheets:>
+    <footer:>
+      <a href="#{base_url}/">View Site</a>
+    </footer:>
+  </old-page>
+</extend>
+
+<extend tag="form" for="Page">
+  <old-form merge multipart>
+    <field-list: fields="comic, title, commentary, published_at, book"/>
+  </old-form>
+</extend>
