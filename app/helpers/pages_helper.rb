@@ -6,11 +6,13 @@ module PagesHelper
     end
   end
 
-  def maybe_link(name, url, *args)
+  def maybe_link(name, url)
+    klass = name.downcase
+
     if url
-      link_to(name, url, *args)
+      link_to(name, url, :class => klass, :title => name)
     else
-      content_tag(:a, name, *args)
+      content_tag(:a, name, :class => klass, :title => name)
     end
   end
 

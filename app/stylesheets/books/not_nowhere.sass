@@ -1,0 +1,23 @@
+=replace_text( !img, !x = 50%, !y = 50% )
+  text-indent: -9999em
+  color: transparent
+  overflow:    hidden
+  background:
+    image: url(!img)
+    repeat: no-repeat
+    position: !x !y
+
+=nav_link(!name, !w, !h)
+  +replace_text("/images/books/not_nowhere/#{!name}.gif")
+  display: inline-block
+  width: !w
+  height: !h
+
+a.first
+  +nav_link('first', 127px, 88px)
+a.previous
+  +nav_link('previous', 134px, 88px)
+a.next
+  +nav_link('next', 134px, 88px)
+a.last
+  +nav_link('last', 127px, 88px)

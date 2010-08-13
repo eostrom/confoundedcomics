@@ -14,6 +14,10 @@ class Book < ActiveRecord::Base
 
   has_attached_file :banner
 
+  def style
+    title.downcase.gsub(/\s+/, '_')
+  end
+
   # --- Permissions --- #
 
   def create_permitted?
