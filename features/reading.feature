@@ -44,3 +44,12 @@ Feature: Reading comics!
 
      When I follow "Last"
      Then I should be on the page "Page 3"
+
+  Scenario: Jump to a page
+    Given the following pages exist:
+        | Title  | Commentary       | Published At | Book          |
+        | Page 1 | The first page.  |   2010-08-01 | Title: Book 1 |
+        | Page 2 | The second page. |   2010-08-02 | Title: Book 1 |
+     When I go to the home page
+      And I follow "Page 1"
+     Then I should be on the page "Page 1"

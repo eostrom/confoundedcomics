@@ -6,6 +6,7 @@
 
     %title #{h(@page.book.title)} - Confounded Contraption
     = stylesheet_link_tag("books/#{@book.style}.css")
+    = javascript_include_tag('prototype', 'lowpro', 'application')
     :css
       .black9 {font-family: times; font-size: 9pt; color: #000000; padding: 5px;}
       .black11 {font-family: times; font-size: 12pt; color: #000000; padding: 15px; text-align: left;}
@@ -46,7 +47,7 @@
             %td{:colspan => "2"}
               %center
                 %span.rss-content
-                  = image_tag(@page.comic.url, :alt => @page.title)
+                  = image_tag(@page.comic.url, :alt => h(@page.title))
               %br/
               %center
                 = first_page_link(@page)
@@ -54,7 +55,11 @@
                 = next_page_link(@page)
                 = last_page_link(@page)
                 %br/
-                %a{:href => "http://www.topatoco.com/merchant.mvc?Screen=PROD&Store_Code=TO&Product_Code=BEAT-COMICPRINT&Product_Attributes[1]:value=http%3A%2F%2Fwww.harkavagrant.com%2Findex.php%3Fid%3D275", :style => "font-size:12px;"} buy this print!
+                #archive
+                  %h2= link_to 'Archive', '#pages'
+                  %ol#pages
+                    - @book.pages.each do |page|
+                      %li= link_to_unless page == @page, h(page.title), page
               /
                 <span class="rss-title">Hark, a Vagrant: X-Men, Wonder Woman</span>
 
