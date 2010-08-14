@@ -39,8 +39,8 @@
                 %center
                   %a{:href => "http://www.projectwonderful.com/advertisehere.php?id=35716&amp;type=5", :style => "font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;", :target => "_blank"} Ads by Project Wonderful!  Your ad here, right now: $0
         / End of Project Wonderful ad code.
-      = banner_link(@book)
-      %br/
+      #banner
+        = banner_link(@book)
       %center
         %table{:cell => "", :padding => "3"}
           %tr
@@ -68,28 +68,10 @@
                 <span class="rss-id">http://www.harkavagrant.com/index.php?id=275</span>
 
                 <span class="rss-content"><P></span>
-          %tr
-            %td{:bgcolor => "grey", :valign => "top", :width => "500"}
-              %table{:align => "left", :border => "0", :cellpadding => "8", :cellspacing => "0"}
-                %tr
-                  %td{:align => "center", :valign => "top"}
-                    %img{:src => "kateicon.png"}/
-                    %font{:face => "verdana", :size => "-2"}
-                      %br/
-                      %a{:href => "about.php"} Kate Beaton
-              .black11
-                %div.rss-content
-                  = simple_format(@page.commentary)
-              / extra page content table - links etc
-              %table{:align => "center", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "500"}
-                %tr
-                  %td{:valign => "top"}/
-                %tr
-              .black9{:align => "center"}
-                %a{:href => "http://beatonna.livejournal.com/"} Livejournal
-                \/
-                %a{:href => "http://www.voxel.net/industry/content-publishers?utm_source=harkavagrant&utm_medium=footer_link&utm_campaign=HarkaVagrant.com%2BSponsorship", :target => "_blank"} Cloud Hosting by Voxel
-        / end of extra page content
+          - if @page.commentary.present?
+            %tr#news
+              %td(colspan=2)
+                = simple_format(@page.commentary)
         %td
         -#
           TK
@@ -110,4 +92,5 @@
               %tr
                 %td{:bgcolor => "#000000", :colspan => "1", :style => "height:3px;font-size:1px;padding:0px;max-height:3px;", :valign => "top", :width => "160"}
           / End of Project Wonderful ad code.
-        All content (c)2006-2010 Kate Beaton
+        %p
+          &copy; 2004-2010 Kate Stewart
