@@ -45,14 +45,14 @@ class PagesControllerTest < ActionController::TestCase
     end
 
     should 'generate a book-and-page URL' do
-      assert_equal '/pages/book-1-page-1', page_path(@page)
+      assert_equal '/pages/book-1:2010-08-08:page-1', page_path(@page)
       assert_recognizes(
         {
           :controller => 'pages',
           :action => 'show',
           :id => @page.to_param
         },
-        '/pages/book-1-page-1')
+        '/pages/book-1:2010-08-08:page-1')
     end
   end
 end

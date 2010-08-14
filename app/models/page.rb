@@ -12,11 +12,15 @@ class Page < ActiveRecord::Base
   belongs_to :book
   validates_presence_of :book, :title
 
-  has_friendly_id :book_and_title, :use_slug => true
-
-  def book_and_title
-    "#{book.to_param} #{title}"
+  has_friendly_id :book_date_title, :use_slug => true
+  def book_date_title
+    [
+      book.to_param,
+      published_at,
+      FriendlyId::SlugString.new(title).normalize!
+    ].join(':')
   end
+  def normalize_friendly_id(text); text; end
 
   named_scope :before, lambda { |finish|
     finish = finish.published_at if Page === finish
