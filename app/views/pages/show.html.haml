@@ -69,11 +69,19 @@
                 <span class="rss-id">http://www.harkavagrant.com/index.php?id=275</span>
 
                 <span class="rss-content"><P></span>
-          - if @page.commentary.present?
-            %tr#news
-              %td(colspan=2)
-                = simple_format(@page.commentary)
-        %td
+          %tr#news
+            %td(colspan=2)
+              %p.date= @page.published_at
+              = simple_format(@page.commentary)
+
+        %ul#site_nav
+          %li.home= link_to 'Home', 'http://confoundedcontraption.com/'
+          %li.comix= link_to 'Comix', root_path
+          %li.tips
+            = render :partial => 'shared/tipjar'
+          %li.store= link_to 'Store', 'http://katesaturday.etsy.com/'
+          %li.contact= link_to 'Contact', 'mailto:kate@confoundedcontraption.com'
+
         -#
           TK
           / Beginning of Project Wonderful ad code:
@@ -93,5 +101,6 @@
               %tr
                 %td{:bgcolor => "#000000", :colspan => "1", :style => "height:3px;font-size:1px;padding:0px;max-height:3px;", :valign => "top", :width => "160"}
           / End of Project Wonderful ad code.
-        %p
-          &copy; 2004-2010 Kate Stewart
+
+      %p
+        &copy; 2004-2010 Kate Stewart
