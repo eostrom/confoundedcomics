@@ -2,7 +2,7 @@ module PagesHelper
   def banner_link(book)
     if book.banner?
       link_to(image_tag(book.banner.url, :alt => book.title),
-        [book, book.pages.latest])
+        book.pages.latest)
     end
   end
 
@@ -10,7 +10,7 @@ module PagesHelper
     klass = name.downcase
 
     if page
-      link_to(name, [page.book, page], :class => klass, :title => name)
+      link_to(name, page, :class => klass, :title => name)
     else
       content_tag(:a, name, :class => klass, :title => name)
     end

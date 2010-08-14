@@ -6,8 +6,6 @@ ActionController::Routing::Routes.draw do |map|
 
   Hobo.add_routes(map)
 
-  map.book_page 'pages/:scope/:id', :controller => 'pages', :action => 'show'
-
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

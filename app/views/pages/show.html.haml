@@ -60,7 +60,7 @@
                   %h2= link_to 'Archive', '#pages'
                   %ol#pages
                     - @book.pages.each do |page|
-                      %li= link_to_unless page == @page, h(page.title), [@book, page]
+                      %li= link_to_unless page == @page, h(page.title), page
               /
                 <span class="rss-title">Hark, a Vagrant: X-Men, Wonder Woman</span>
 

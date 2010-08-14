@@ -37,7 +37,7 @@ class PagesControllerTest < ActionController::TestCase
     end
   end
 
-  context 'book_page_path' do
+  context 'page_path' do
     setup do
       @book = Factory.create(:book, :title => 'Book 1')
       @page = Factory.create(:page, :title => 'Page 1',
@@ -45,15 +45,14 @@ class PagesControllerTest < ActionController::TestCase
     end
 
     should 'generate a book-and-page URL' do
-      assert_equal '/pages/book-1/page-1', book_page_path(@book, @page)
+      assert_equal '/pages/book-1-page-1', page_path(@page)
       assert_recognizes(
         {
           :controller => 'pages',
           :action => 'show',
-          :id => @page.to_param,
-          :scope => @book.to_param
+          :id => @page.to_param
         },
-        '/pages/book-1/page-1')
+        '/pages/book-1-page-1')
     end
   end
 end
