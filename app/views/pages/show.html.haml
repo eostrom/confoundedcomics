@@ -50,10 +50,11 @@
                   = image_tag(@page.comic.url, :alt => h(@page.title))
               %br/
               %center
-                = first_page_link(@page)
-                = previous_page_link(@page)
-                = next_page_link(@page)
-                = last_page_link(@page)
+                #page_nav
+                  = first_page_link(@page)
+                  = previous_page_link(@page)
+                  = next_page_link(@page)
+                  = last_page_link(@page)
                 %br/
                 #archive
                   %h2= link_to 'Archive', '#pages'

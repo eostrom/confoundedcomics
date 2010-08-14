@@ -16,14 +16,21 @@
 #banner
   margin: 2em
 
-a.first
-  +nav_link('first', 127px, 88px)
-a.previous
-  +nav_link('previous', 134px, 88px)
-a.next
-  +nav_link('next', 134px, 88px)
-a.last
-  +nav_link('last', 127px, 88px)
+#page_nav
+  a
+    opacity: 0.1
+  a:link, a:visited
+    opacity: 1
+    &:hover
+      opacity: 0.7
+  a.first
+    +nav_link('first', 127px, 88px)
+  a.previous
+    +nav_link('previous', 134px, 88px)
+  a.next
+    +nav_link('next', 134px, 88px)
+  a.last
+    +nav_link('last', 127px, 88px)
 
 #archive
   position: relative
