@@ -10,15 +10,15 @@ class Page < ActiveRecord::Base
   end
 
   belongs_to :book
-  validates_presence_of :book, :title
+  validates_presence_of :book
 
   has_friendly_id :book_date_title, :use_slug => true
   def book_date_title
     [
       book.to_param,
       published_at,
-      FriendlyId::SlugString.new(title).normalize!
-    ].join(':')
+      (FriendlyId::SlugString.new(title).normalize! if title.present?)
+    ].compact.join(':')
   end
   def normalize_friendly_id(text); text; end
 

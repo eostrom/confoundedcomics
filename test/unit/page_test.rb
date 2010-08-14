@@ -77,4 +77,26 @@ class PageTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context 'A Page' do
+    setup do
+      @page = Factory.create(:page,
+        :published_at => '2010-08-08', :title => 'A Page',
+        :book => Factory.create(:book, :title => 'A Book'))
+    end
+
+    should 'have a book:date:title permalink' do
+      assert_equal 'a-book:2010-08-08:a-page', @page.to_param
+    end
+
+    context 'with no title' do
+      setup do
+        @page.update_attributes(:title => nil)
+      end
+
+      should 'have a book:date permalink' do
+        assert_equal 'a-book:2010-08-08', @page.to_param
+      end
+    end
+  end
 end
