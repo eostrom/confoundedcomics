@@ -11,7 +11,8 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
     when /the page "(.*)"/
-      page_path(Page.find_by_title($1))
+      page = Page.find_by_title($1)
+      book_page_path(page.book, page)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

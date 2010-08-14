@@ -36,4 +36,24 @@ class PagesControllerTest < ActionController::TestCase
       it { should assign_to(:page).with(@page1) }
     end
   end
+
+  context 'book_page_path' do
+    setup do
+      @book = Factory.create(:book, :title => 'Book 1')
+      @page = Factory.create(:page, :title => 'Page 1',
+        :published_at => '2010-08-08', :book => @book)
+    end
+
+    should 'generate a book-and-page URL' do
+      assert_equal '/pages/book-1/page-1', book_page_path(@book, @page)
+      assert_recognizes(
+        {
+          :controller => 'pages',
+          :action => 'show',
+          :id => @page.to_param,
+          :scope => @book.to_param
+        },
+        '/pages/book-1/page-1')
+    end
+  end
 end

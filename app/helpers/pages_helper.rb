@@ -2,15 +2,15 @@ module PagesHelper
   def banner_link(book)
     if book.banner?
       link_to(image_tag(book.banner.url, :alt => book.title),
-        book.pages.latest)
+        [book, book.pages.latest])
     end
   end
 
-  def maybe_link(name, url)
+  def maybe_link(name, page)
     klass = name.downcase
 
-    if url
-      link_to(name, url, :class => klass, :title => name)
+    if page
+      link_to(name, [page.book, page], :class => klass, :title => name)
     else
       content_tag(:a, name, :class => klass, :title => name)
     end

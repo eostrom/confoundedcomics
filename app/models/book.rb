@@ -9,10 +9,12 @@ class Book < ActiveRecord::Base
     timestamps
   end
 
-  has_many :pages, :order => 'published_at ASC'
+  has_many :pages, :order => "pages.published_at ASC"
   validates_presence_of :title
 
   has_attached_file :banner
+
+  has_friendly_id :title, :use_slug => true
 
   def style
     title.downcase.gsub(/\s+/, '_')
