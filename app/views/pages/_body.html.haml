@@ -1,0 +1,5 @@
+- page = body
+
+%p= image_tag(page.comic.url, :alt => h(page.title))
+
+#news= simple_format(page.commentary)
