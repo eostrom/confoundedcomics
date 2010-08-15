@@ -4,7 +4,8 @@
       Template ripped off from the wonderful Hark, A Vagrant!
       http://www.harkavagrant.com/
 
-    %title #{h(@page.book.title)} - Confounded Contraption
+    %title #{h(@book.title)} - Confounded Contraption
+    = auto_discovery_link_tag(:atom, pages_path(:book_id => @book))
     = stylesheet_link_tag("books/#{@book.style}.css")
     = javascript_include_tag('prototype', 'lowpro', 'application')
     :css
