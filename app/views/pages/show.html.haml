@@ -8,100 +8,36 @@
     = auto_discovery_link_tag(:atom, pages_path(:book_id => @book))
     = stylesheet_link_tag("books/#{@book.style}.css")
     = javascript_include_tag('prototype', 'lowpro', 'application')
-    :css
-      .black9 {font-family: times; font-size: 9pt; color: #000000; padding: 5px;}
-      .black11 {font-family: times; font-size: 12pt; color: #000000; padding: 15px; text-align: left;}
-    -# tk %link{:href => "http://www.rsspect.com/rss/TK.xml", :rel => "alternate", :title => "RSS feed for TK", :type => "application/rss+xml"}/
-  -# tk
-    :javascript
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    :javascript
-      try {
-      var pageTracker = _gat._getTracker("UA-2754958-2");
-      pageTracker._trackPageview();
-      } catch(err) {}
-  %body{:alink => "black", :bgcolor => "white", :leftmargin => "5", :link => "black", :marginheight => "5", :marginwidth => "5", :topmargin => "5", :vlink => "black"}
-    %div{:align => "center"}
-      -#
-        TK
-        / Beginning of Project Wonderful ad code:
-        / Ad box ID: 35716
-        %script{:src => "http://www.projectwonderful.com/ad_display.js", :type => "text/javascript"}
-        %noscript
-          %map#admap35716{:name => "admap35716"}
-            %area{:alt => "", :coords => "0,0,728,90", :href => "http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=35716&amp;type=5", :shape => "rect", :target => "_blank", :title => ""}/
-          %table{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "728"}
-            %tr
-              %td
-                %img{:alt => "", :border => "0", :height => "90", :src => "http://www.projectwonderful.com/nojs.php?id=35716&amp;type=5", :usemap => "#admap35716", :width => "728"}/
-            %tr
-              %td{:bgcolor => "#ffffff", :colspan => "1"}
-                %center
-                  %a{:href => "http://www.projectwonderful.com/advertisehere.php?id=35716&amp;type=5", :style => "font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;", :target => "_blank"} Ads by Project Wonderful!  Your ad here, right now: $0
-        / End of Project Wonderful ad code.
-      #banner
-        = banner_link(@book)
-      %center
-        %table{:cell => "", :padding => "3"}
-          %tr
-            %td{:colspan => "2"}
-              %center
-                %span.rss-content
-                  = image_tag(@page.comic.url, :alt => h(@page.title))
-              %br/
-              %center
-                #page_nav
-                  = first_page_link(@page)
-                  = previous_page_link(@page)
-                  = next_page_link(@page)
-                  = last_page_link(@page)
-                %br/
-                #archive
-                  %h2= link_to 'Archive', '#pages'
-                  %ol#pages
-                    - @book.pages.each do |page|
-                      %li= link_to_unless page == @page, h(page.title), page
-              /
-                <span class="rss-title">Hark, a Vagrant: X-Men, Wonder Woman</span>
+  %body
+    #banner
+      = banner_link(@book)
 
-                <span class="rss-link">http://www.harkavagrant.com/index.php?id=275</span>
+    #comic
+      = image_tag(@page.comic.url, :alt => h(@page.title))
 
-                <span class="rss-id">http://www.harkavagrant.com/index.php?id=275</span>
+    #page_nav
+      = first_page_link(@page)
+      = previous_page_link(@page)
+      = next_page_link(@page)
+      = last_page_link(@page)
 
-                <span class="rss-content"><P></span>
-          %tr#news
-            %td(colspan=2)
-              %p.date= @page.published_at
-              = simple_format(@page.commentary)
+    #archive
+      %h2= link_to 'Archive', '#pages'
+      %ol#pages
+        - @book.pages.each do |page|
+          %li= link_to_unless page == @page, h(page.title), page
 
-        %ul#site_nav
-          %li.home= link_to 'Home', 'http://confoundedcontraption.com/'
-          %li.comix= link_to 'Comix', root_path
-          %li.tips
-            = render :partial => 'shared/tipjar'
-          %li.store= link_to 'Store', 'http://katesaturday.etsy.com/'
-          %li.contact= link_to 'Contact', 'mailto:kate@confoundedcontraption.com'
+    #news
+      %p.date= @page.published_at
+      = simple_format(@page.commentary)
 
-        -#
-          TK
-          / Beginning of Project Wonderful ad code:
-          / Ad box ID: 35717
-          %script{:src => "http://www.projectwonderful.com/ad_display.js", :type => "text/javascript"}
-          %noscript
-            %map#admap35717{:name => "admap35717"}
-              %area{:alt => "", :coords => "0,0,160,600", :href => "http://www.projectwonderful.com/out_nojs.php?r=0&amp;c=0&amp;id=35717&amp;type=3", :shape => "rect", :target => "_blank", :title => ""}/
-            %table{:bgcolor => "#ffffff", :border => "0", :cellpadding => "0", :cellspacing => "0", :width => "160"}
-              %tr
-                %td
-                  %img{:alt => "", :border => "0", :height => "600", :src => "http://www.projectwonderful.com/nojs.php?id=35717&amp;type=3", :usemap => "#admap35717", :width => "160"}/
-              %tr
-                %td{:bgcolor => "#ffffff", :colspan => "1"}
-                  %center
-                    %a{:href => "http://www.projectwonderful.com/advertisehere.php?id=35717&amp;type=3", :style => "font-size:10px;color:#0000ff;text-decoration:none;line-height:1.2;font-weight:bold;font-family:Tahoma, verdana,arial,helvetica,sans-serif;text-transform: none;letter-spacing:normal;text-shadow:none;white-space:normal;word-spacing:normal;", :target => "_blank"} Ads by Project Wonderful!  Your ad here, right now: $0
-              %tr
-                %td{:bgcolor => "#000000", :colspan => "1", :style => "height:3px;font-size:1px;padding:0px;max-height:3px;", :valign => "top", :width => "160"}
-          / End of Project Wonderful ad code.
+    %ul#site_nav
+      %li.home= link_to 'Home', 'http://confoundedcontraption.com/'
+      %li.comix= link_to 'Comix', root_path
+      %li.tips
+        = render :partial => 'shared/tipjar'
+      %li.store= link_to 'Store', 'http://katesaturday.etsy.com/'
+      %li.contact= link_to 'Contact', 'mailto:kate@confoundedcontraption.com'
 
-      %p
-        &copy; 2004-2010 Kate Stewart
+    %p#copyright
+      &copy; 2004-2010 Kate Stewart

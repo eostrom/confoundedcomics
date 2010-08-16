@@ -13,12 +13,26 @@
   width: !w
   height: !h
 
+body
+  width: 800px
+  margin: 5px auto
+  color: black
+  text-align: center
+
+a:link, a:visited
+  color: black
+
 #banner
   margin: 2em
   a img
     border: none
 
+#comic
+  img
+    max-width: 100%
+
 #page_nav
+  margin-top: 2em
   a
     opacity: 0.1
   a:link, a:visited
@@ -35,11 +49,11 @@
     +nav_link('last', 127px, 88px)
 
 #archive
+  width: 250px
+  margin: auto
   position: relative
-  display: inline-block
   border: 2px solid transparent
   h2
-    text-align: center
     padding: 0 3em
   ol
     display: none
@@ -63,20 +77,32 @@
       border-top-width: 0
 
 #news
+  padding: 2em
   background-color: #656565
   color: white
+  text-align: left
   .date
     font-weight: bold
-  td
-    padding: 2em
+  p
+    margin-top: 0
+  p:last-child
+    margin-bottom: 0
 
 ul#site_nav
   font-size: 150%
-  padding: 0
+  // line up with news text
+  padding: 0 1.3em
+  white-space: nowrap
   li
     display: inline-block
     list-style-type: none
-    padding: 0 2em
+    padding: 0
+    // line up with news text
+    margin: 0 1.95em
+    &:first-child
+      margin-left: 0
+    &:last-child
+      margin-right: 0
     a
       text-decoration: none
       &:hover
