@@ -1,3 +1,4 @@
+!!!
 %html
   %head
     /
@@ -8,6 +9,9 @@
     = auto_discovery_link_tag(:atom, pages_path(:book_id => @book))
     = stylesheet_link_tag("books/#{@book.style}.css")
     = javascript_include_tag('prototype', 'lowpro', 'application')
+    /[if lt IE 9]
+      %script(src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js")
+
   %body
     #banner
       = banner_link(@book)
@@ -15,11 +19,12 @@
     #comic
       = image_tag(@page.comic.url, :alt => h(@page.title))
 
-    #page_nav
-      = first_page_link(@page)
-      = previous_page_link(@page)
-      = next_page_link(@page)
-      = last_page_link(@page)
+    -# TODO: make these look right on IE 7
+    %ul#page_nav
+      %li= first_page_link(@page)
+      %li= previous_page_link(@page)
+      %li= next_page_link(@page)
+      %li= last_page_link(@page)
 
     #archive
       %h2= link_to 'Archive', '#pages'

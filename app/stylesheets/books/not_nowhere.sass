@@ -7,20 +7,28 @@
     repeat: no-repeat
     position: !x !y
 
+// borrowed from Compass
+=inline-block
+  display: -moz-inline-box
+  -moz-box-orient: vertical
+  display: inline-block
+  vertical-align: middle
+  zoom: 1
+  *display: inline
+
 =nav_link(!name, !w, !h)
   +replace_text("/images/books/not_nowhere/#{!name}.gif")
-  display: inline-block
+  display: block
   width: !w
   height: !h
+
+body, a:link, a:visited
+  color: black
 
 body
   width: 800px
   margin: 5px auto
-  color: black
   text-align: center
-
-a:link, a:visited
-  color: black
 
 #banner
   margin: 2em
@@ -32,7 +40,10 @@ a:link, a:visited
     max-width: 100%
 
 #page_nav
+  padding: 0
   margin-top: 2em
+  li
+    +inline-block
   a
     opacity: 0.1
   a:link, a:visited
@@ -54,12 +65,14 @@ a:link, a:visited
   position: relative
   border: 2px solid transparent
   h2
+    margin: 0.83em 0
     padding: 0 3em
   ol
     display: none
     position: absolute
-    top: 2em
+    top: 3em
     padding: 0
+    margin: 0
     width: 100%
     background-color: white
     padding-bottom: 1.25em
@@ -92,9 +105,10 @@ ul#site_nav
   font-size: 150%
   // line up with news text
   padding: 0 1.3em
+  margin: 1em 0
   white-space: nowrap
   li
-    display: inline-block
+    +inline-block
     list-style-type: none
     padding: 0
     // line up with news text
@@ -107,3 +121,6 @@ ul#site_nav
       text-decoration: none
       &:hover
         opacity: 0.7
+    form
+      // for IE 7
+      margin: 0
