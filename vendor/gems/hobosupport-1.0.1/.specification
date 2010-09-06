@@ -1,0 +1,92 @@
+--- !ruby/object:Gem::Specification 
+name: hobosupport
+version: !ruby/object:Gem::Version 
+  hash: 21
+  prerelease: false
+  segments: 
+  - 1
+  - 0
+  - 1
+  version: 1.0.1
+platform: ruby
+authors: 
+- Tom Locke
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-05-31 00:00:00 -07:00
+default_executable: 
+dependencies: []
+
+description: 
+email: tom@tomlocke.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.txt
+files: 
+- CHANGES.txt
+- README.txt
+- Rakefile
+- lib/hobo_support.rb
+- lib/hobo_support/array.rb
+- lib/hobo_support/blankslate.rb
+- lib/hobo_support/enumerable.rb
+- lib/hobo_support/fixes.rb
+- lib/hobo_support/fixes/chronic.rb
+- lib/hobo_support/fixes/module.rb
+- lib/hobo_support/fixes/pp.rb
+- lib/hobo_support/hash.rb
+- lib/hobo_support/implies.rb
+- lib/hobo_support/metaid.rb
+- lib/hobo_support/methodcall.rb
+- lib/hobo_support/methodphitamine.rb
+- lib/hobo_support/module.rb
+- lib/hobo_support/string.rb
+- lib/hobosupport.rb
+- test/hobosupport.rdoctest
+- test/hobosupport/enumerable.rdoctest
+- test/hobosupport/hash.rdoctest
+- test/hobosupport/implies.rdoctest
+- test/hobosupport/metaid.rdoctest
+- test/hobosupport/methodphitamine.rdoctest
+- test/hobosupport/module.rdoctest
+has_rdoc: true
+homepage: http://hobocentral.net/
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: hobosupport
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: Core Ruby extensions from the Hobo project
+test_files: []
+

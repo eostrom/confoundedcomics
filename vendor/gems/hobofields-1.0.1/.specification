@@ -1,0 +1,140 @@
+--- !ruby/object:Gem::Specification 
+name: hobofields
+version: !ruby/object:Gem::Version 
+  hash: 21
+  prerelease: false
+  segments: 
+  - 1
+  - 0
+  - 1
+  version: 1.0.1
+platform: ruby
+authors: 
+- Tom Locke
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2010-05-31 00:00:00 -07:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: rails
+  prerelease: false
+  requirement: &id001 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        hash: 3
+        segments: 
+        - 2
+        - 2
+        - 2
+        version: 2.2.2
+  type: :runtime
+  version_requirements: *id001
+- !ruby/object:Gem::Dependency 
+  name: hobosupport
+  prerelease: false
+  requirement: &id002 !ruby/object:Gem::Requirement 
+    none: false
+    requirements: 
+    - - "="
+      - !ruby/object:Gem::Version 
+        hash: 21
+        segments: 
+        - 1
+        - 0
+        - 1
+        version: 1.0.1
+  type: :runtime
+  version_requirements: *id002
+description: 
+email: tom@tomlocke.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- LICENSE.txt
+- README.txt
+files: 
+- CHANGES.txt
+- LICENSE.txt
+- README.txt
+- Rakefile
+- lib/hobo_fields.rb
+- lib/hobo_fields/email_address.rb
+- lib/hobo_fields/enum_string.rb
+- lib/hobo_fields/field_declaration_dsl.rb
+- lib/hobo_fields/field_spec.rb
+- lib/hobo_fields/fields_declaration.rb
+- lib/hobo_fields/html_string.rb
+- lib/hobo_fields/index_spec.rb
+- lib/hobo_fields/lifecycle_state.rb
+- lib/hobo_fields/markdown_string.rb
+- lib/hobo_fields/migration_generator.rb
+- lib/hobo_fields/model_extensions.rb
+- lib/hobo_fields/password_string.rb
+- lib/hobo_fields/raw_html_string.rb
+- lib/hobo_fields/raw_markdown_string.rb
+- lib/hobo_fields/sanitize_html.rb
+- lib/hobo_fields/serialized_object.rb
+- lib/hobo_fields/text.rb
+- lib/hobo_fields/textile_string.rb
+- lib/hobofields.rb
+- rails/init.rb
+- rails_generators/hobo_migration/USAGE
+- rails_generators/hobo_migration/hobo_migration_generator.rb
+- rails_generators/hobo_migration/templates/migration.rb
+- rails_generators/hobofield_model/USAGE
+- rails_generators/hobofield_model/hobofield_model_generator.rb
+- rails_generators/hobofield_model/templates/fixtures.yml.erb
+- rails_generators/hobofield_model/templates/model.rb.erb
+- rails_generators/hobofield_model/templates/test.rb.erb
+- script/destroy
+- script/generate
+- test/hobofields.rdoctest
+- test/hobofields_api.rdoctest
+- test/migration_generator.rdoctest
+- test/migration_generator_primary_key.rdoctest
+- test/rich_types.rdoctest
+- test/test_generator_helper.rb
+- test/test_hobofield_model_generator.rb
+has_rdoc: true
+homepage: http://hobocentral.net/
+licenses: []
+
+post_install_message: 
+rdoc_options: 
+- --charset=UTF-8
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  none: false
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      hash: 3
+      segments: 
+      - 0
+      version: "0"
+requirements: []
+
+rubyforge_project: hobo
+rubygems_version: 1.3.7
+signing_key: 
+specification_version: 3
+summary: Rich field types and migration generator for Rails
+test_files: []
+
