@@ -1,4 +1,4 @@
-class Admin::PagesController < ApplicationController
+class Admin::PagesController < Admin::AdminSiteController
 
   hobo_model_controller Page
 

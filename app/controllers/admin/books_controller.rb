@@ -1,4 +1,4 @@
-class Admin::BooksController < ApplicationController
+class Admin::BooksController < Admin::AdminSiteController
 
   hobo_model_controller Book
 
