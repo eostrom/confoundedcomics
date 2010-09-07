@@ -14,5 +14,5 @@ user = 'confoundedcomics'
 #skip_steps = nil
 
 before_restarting_server do
-  rake 'hobo:generate_taglibs'
+  rake "RAILS_ENV=#{environment} hobo:generate_taglibs"
 end
