@@ -22,6 +22,10 @@ class Page < ActiveRecord::Base
   end
   def normalize_friendly_id(text); text; end
 
+  def published_at=(time)
+    self[:published_at] = time && time.to_date
+  end
+
   named_scope :before, lambda { |finish|
     finish = finish.published_at if Page === finish
     { :conditions => ['published_at < ?', finish] }

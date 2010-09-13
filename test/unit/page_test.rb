@@ -8,7 +8,7 @@ class PageTest < ActiveSupport::TestCase
     end
 
     context 'published in the past' do
-      setup { @page.update_attribute(:published_at, 2.day.ago) }
+      setup { @page.update_attribute(:published_at, 2.days.ago) }
 
       should('be in .published') { assert Page.published.include?(@page) }
 
