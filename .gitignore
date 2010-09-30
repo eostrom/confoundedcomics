@@ -18,3 +18,4 @@ app/views/taglibs/auto/**/*.dryml
 app/views/taglibs/auto/*/*/*.dryml
 capybara-*.html
 public/stylesheets/books/*.css
+public/system
