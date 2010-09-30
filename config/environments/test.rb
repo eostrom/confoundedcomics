@@ -30,3 +30,4 @@ config.action_mailer.delivery_method = :test
 config.gem 'mocha', :version => '~> 0.9.8'
 config.gem 'factory_girl', :version => '~> 1.3.2'
 config.gem 'shoulda', :version => '~> 2.11.3'
+config.gem 'faker', :version => '0.3.1'

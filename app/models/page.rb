@@ -22,6 +22,11 @@ class Page < ActiveRecord::Base
   end
   def normalize_friendly_id(text); text; end
 
+  def to_s
+    title.presence || '[untitled]'
+  end
+  def self.name_attribute; :to_s; end
+
   def published_at=(time)
     self[:published_at] = time && time.to_date
   end
