@@ -27,7 +27,7 @@ Rails::Initializer.run do |config|
   config.gem 'paperclip', :version => '~> 2.3.3'
   config.gem 'haml', :version => '~> 3.0.16'
   config.gem 'friendly_id', :version => '~> 2.3'
-  # config.gem 'searchlogic', :version => '~> 2.4.22'
+  config.gem 'searchlogic', :version => '~> 2.4.26'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

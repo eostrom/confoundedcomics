@@ -20,6 +20,10 @@ class Book < ActiveRecord::Base
     title.downcase.gsub(/\s+/, '_')
   end
 
+  named_scope :published, lambda {
+    { :conditions => ['published_at <= ?', Time.zone.now] }
+  }
+
   # --- Permissions --- #
 
   def create_permitted?

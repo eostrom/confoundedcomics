@@ -1,8 +1,27 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
 class BookTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  def test_truth
-    assert true
+  context 'Book' do
+    context '.published.descend_by_published_at' do
+      setup do
+        @published = Factory.create(:book, :published_at => 2.days.ago)
+        @unpublished = Factory.create(:book, :published_at => 2.days.from_now)
+        @unscheduled = Factory.create(:book, :published_at => nil)
+
+        @result = Book.published.descend_by_published_at.to_a
+      end
+
+      should 'include published books' do
+        assert @result.include?(@published)
+      end
+
+      should 'not include books to be published' do
+        assert !@result.include?(@unpublished)
+      end
+
+      should 'not include unscheduled books' do
+        assert !@result.include?(@unscheduled)
+      end
+    end
   end
 end

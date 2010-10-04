@@ -24,7 +24,7 @@ Feature: Reading comics!
         | Page 1 | The first page.  |   2010-08-01 | Title: Book 1 |
         | Page 3 | The third page.  |   2010-08-03 | Title: Book 1 |
         | Page 2 | The second page. |   2010-08-02 | Title: Book 1 |
-     When I go to the home page
+     When I go to the book "Book 1"
      Then I should see "The third page."
       And "Next" should not be a link
       And "Last" should not be a link
@@ -50,6 +50,22 @@ Feature: Reading comics!
         | Title  | Commentary       | Published At | Book          |
         | Page 1 | The first page.  |   2010-08-01 | Title: Book 1 |
         | Page 2 | The second page. |   2010-08-02 | Title: Book 1 |
-     When I go to the home page
+     When I go to the book "Book 1"
       And I follow "Page 1"
      Then I should be on the page "Page 1"
+
+  Scenario: Browse different books
+    Given the following books exist:
+        | Title  | Published At |
+        | Book 1 |   2010-08-02 |
+        | Book 2 |   2010-08-01 |
+    Given the following pages exist:
+        | Title  | Book          | Published At |
+        | Page 1 | Title: Book 1 |   2010-08-02 |
+        | Page A | Title: Book 2 |   2010-08-01 |
+     When I go to the home page
+      And I follow "Book 2"
+     Then I should be on "Page A" of "Book 2"
+
+     When I follow "Comix"
+     Then I should be on the home page

@@ -1,7 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
 
   map.site_search  'search', :controller => 'front', :action => 'search'
-  map.root :controller => 'pages', :action => 'show'
+  map.root :controller => 'books', :action => 'index'
+  map.resources :books, :only => [:index, :show]
   map.resources :pages, :only => [:index, :show]
 
   Hobo.add_routes(map)

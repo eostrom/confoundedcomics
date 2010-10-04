@@ -1,0 +1,4 @@
+%ol.books
+  - @books.each do |book|
+    %li
+      = link_to h(book.title), book_path(book)

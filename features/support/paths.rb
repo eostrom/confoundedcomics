@@ -10,8 +10,20 @@ module NavigationHelpers
 
     when /the home\s?page/
       '/'
+    when /the book "(.*)"/
+      # book_path(Book.find_by_title($1))
+      page_path(Book.find_by_title($1).pages.latest)
     when /the page "(.*)"/
       page_path(Page.find_by_title($1))
+    when /(page )?"(.*)" (of|from) "(.*)"/
+      page = Book.find_by_title($4).pages.find_by_title($2)
+      if !page
+        page = Page.find_by_title($2)
+        fail %{Page "#{$2}" not found in book "#{$4}"} +
+          (%{ (found in book "#{page.book.title}")} if page)
+      end
+
+      page_path(page)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
