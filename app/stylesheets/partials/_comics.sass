@@ -1,0 +1,7 @@
+@import base
+
+=nav_link(!book, !name, !w, !h)
+  +replace_text("/images/books/#{!book}/#{!name}")
+  display: block
+  width: !w
+  height: !h

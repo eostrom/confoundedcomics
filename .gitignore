@@ -17,5 +17,6 @@ db/*.sqlite3
 app/views/taglibs/auto/**/*.dryml
 app/views/taglibs/auto/*/*/*.dryml
 capybara-*.html
-public/stylesheets/books/*.css
+public/stylesheets/comics.css
+public/stylesheets/**/*.css
 public/system

@@ -1,0 +1,96 @@
+@import partials/base
+
+body, a:link, a:visited
+  color: black
+
+body
+  width: 800px
+  margin: 5px auto
+  text-align: center
+
+#banner
+  margin: 2em
+  a img
+    border: none
+
+#comic
+  img
+    max-width: 100%
+
+#page_nav
+  padding: 0
+  margin-top: 2em
+  li
+    +inline-block
+  a
+    opacity: 0.1
+  a:link, a:visited
+    opacity: 1
+    &:hover
+      opacity: 0.7
+
+#archive
+  width: 250px
+  margin: auto
+  position: relative
+  border: 2px solid transparent
+  h2
+    margin: 0.83em 0
+    padding: 0 3em
+  ol
+    display: none
+    position: absolute
+    top: 3em
+    padding: 0
+    margin: 0
+    width: 100%
+    background-color: white
+    padding-bottom: 1.25em
+    li
+      list-style-type: none
+      padding: 0 1em
+  &:hover
+    border: 2px solid black
+    z-index: 6000
+    ol
+      display: block
+      z-index: 6000
+      left: -2px
+      border: 2px solid black
+      border-top-width: 0
+
+#news
+  padding: 2em
+  background-color: #656565
+  color: white
+  text-align: left
+  .date
+    font-weight: bold
+  p
+    margin-top: 0
+  p:last-child
+    margin-bottom: 0
+
+ul#site_nav
+  font-size: 150%
+  // line up with news text
+  padding: 0 1.3em
+  margin: 1em 0
+  white-space: nowrap
+  li
+    +inline-block
+    list-style-type: none
+    padding: 0
+    // line up with news text
+    margin: 0 1.95em
+    &:first-child
+      margin-left: 0
+    &:last-child
+      margin-right: 0
+    a
+      text-decoration: none
+      &:hover
+        opacity: 0.7
+    form
+      // for IE 7
+      margin: 0
