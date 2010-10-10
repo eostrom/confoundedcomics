@@ -14,3 +14,13 @@ body
   img
     // hide accidental white edge on banner
     margin-top: -1px
+
+#page_nav
+  a.first
+    +nav_link(!book, 'first.png', 92px, 216px)
+  a.previous
+    +nav_link(!book, 'previous.png', 134px, 216px)
+  a.next
+    +nav_link(!book, 'next.png', 134px, 216px)
+  a.last
+    +nav_link(!book, 'last.png', 108px, 216px)
