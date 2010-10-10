@@ -20,3 +20,4 @@ capybara-*.html
 public/stylesheets/comics.css
 public/stylesheets/**/*.css
 public/system
+.bundle
