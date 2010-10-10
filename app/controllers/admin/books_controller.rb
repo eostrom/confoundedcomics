@@ -1,6 +1,6 @@
 class Admin::BooksController < Admin::AdminSiteController
 
-  hobo_model_controller Book
+  hobo_model_controller
 
   auto_actions :all
 
