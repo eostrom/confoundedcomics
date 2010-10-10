@@ -29,3 +29,14 @@ gem 'mysql2'
 #   gem 'webrat'
 # end
 gem "hobo", ">= 1.3.0.pre9"
+
+# comics stuff
+gem 'paperclip', '~> 2.3.3'
+gem 'haml', '~> 3.0.16'
+gem 'friendly_id', '~> 3.1.7'
+
+group :test do
+  gem 'shoulda', '~> 2.11.3'
+  gem 'factory_girl_rails', '~> 1.0'
+  gem 'faker', '~> 0.3.1'
+end
