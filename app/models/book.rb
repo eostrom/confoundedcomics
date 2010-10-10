@@ -24,6 +24,8 @@ class Book < ActiveRecord::Base
     { :conditions => ['published_at <= ?', Time.zone.now] }
   }
 
+  scope :descend_by_published_at, order('published_at DESC')
+
   # --- Permissions --- #
 
   def create_permitted?
