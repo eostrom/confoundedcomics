@@ -4,7 +4,7 @@ atom_feed do |feed|
 
   for page in @pages
     entry_params = {
-      :published => page.published_at
+      :published => page.published_at.to_time(:local)
     }
 
     feed.entry(page, entry_params) do |entry|
