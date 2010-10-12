@@ -40,3 +40,10 @@ group :test do
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
 end
+
+group :cucumber do
+  gem 'cucumber-rails', '~> 0.3.2'
+  gem 'database_cleaner', '~> 0.5.2'
+  gem 'capybara', '~> 0.3.9'
+  gem 'factory_girl_rails', '~> 1.0'
+end
