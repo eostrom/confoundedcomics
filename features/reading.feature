@@ -61,10 +61,15 @@ Feature: Reading comics!
         | Book 2 |   2010-08-01 |
     Given the following pages exist:
         | Title  | Book          | Published At |
-        | Page 1 | Title: Book 1 |   2010-08-02 |
-        | Page A | Title: Book 2 |   2010-08-01 |
+        | Page 2 | Title: Book 1 |   2010-08-02 |
+        | Page B | Title: Book 2 |   2010-08-01 |
+        | Page 1 | Title: Book 1 |   2010-07-30 |
+        | Page A | Title: Book 2 |   2010-07-29 |
      When I go to the home page
       And I follow "Book 2"
+     Then I should be on "Page B" of "Book 2"
+
+     When I follow "Previous"
      Then I should be on "Page A" of "Book 2"
 
      When I follow "Comix"
