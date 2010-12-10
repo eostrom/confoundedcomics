@@ -35,7 +35,8 @@
 
     #news
       %p.date= @page.published_at
-      = simple_format(@page.commentary)
+      - if @page.commentary.present?
+        = simple_format(@page.commentary)
 
     %ul#site_nav
       %li.home= link_to 'Home', 'http://confoundedcontraption.com/'
