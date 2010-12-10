@@ -16,11 +16,14 @@ body
     margin-top: -1px
 
 #page_nav
+  margin-top: 4em
   a.first
     +nav_link(!book, 'first.png', 92px, 216px)
   a.previous
-    +nav_link(!book, 'previous.png', 134px, 216px)
+    +nav_link(!book, 'prevnext.png', 129px, 216px)
+    background-position: 0 50%
   a.next
-    +nav_link(!book, 'next.png', 134px, 216px)
+    +nav_link(!book, 'prevnext.png', 141px, 216px)
+    background-position: -129px 50%
   a.last
     +nav_link(!book, 'last.png', 108px, 216px)

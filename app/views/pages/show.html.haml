@@ -22,10 +22,10 @@
 
     -# TODO: make these look right on IE 7
     %ul#page_nav
-      %li= first_page_link(@page)
-      %li= previous_page_link(@page)
-      %li= next_page_link(@page)
-      %li= last_page_link(@page)
+      %li>= first_page_link(@page)
+      %li>= previous_page_link(@page)
+      %li>= next_page_link(@page)
+      %li>= last_page_link(@page)
 
     #archive
       %h2= link_to 'Archive', '#pages'
@@ -35,7 +35,8 @@
 
     #news
       %p.date= @page.published_at
-      = simple_format(@page.commentary)
+      - if @page.commentary.present?
+        = simple_format(@page.commentary)
 
     %ul#site_nav
       %li.home= link_to 'Home', 'http://confoundedcontraption.com/'
