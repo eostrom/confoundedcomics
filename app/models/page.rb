@@ -12,6 +12,8 @@ class Page < ActiveRecord::Base
   belongs_to :book
   validates_presence_of :book
 
+  default_scope :order => 'published_at ASC'
+
   has_friendly_id :book_date_title, :use_slug => true
   def book_date_title
     [
@@ -48,8 +50,7 @@ class Page < ActiveRecord::Base
   def previous
     return nil if !published_at
 
-    book.pages.published.before(self).
-      find(:first, :order => 'published_at DESC')
+    book.pages.published.before(self).last
   end
 
   def next
@@ -60,13 +61,13 @@ class Page < ActiveRecord::Base
   end
 
   def last_successor
-    book.pages.published.after(self).find(:first, :order => 'published_at DESC')
+    book.pages.published.after(self).last
   end
 
   has_attached_file :comic
 
   def self.latest
-    published.find(:first, :order => 'published_at DESC')
+    published.last
   end
 
   named_scope :published, lambda {
