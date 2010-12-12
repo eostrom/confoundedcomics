@@ -12,7 +12,7 @@ namespace :db do
   desc 'Back up the database to the tmp/db directory.'
   task :backup do
     timestamp = Time.now.to_s(:number)
-    backup = "#{RAILS_ROOT}/tmp/db/editions.#{Rails.env}.#{timestamp}.sql.gz"
+    backup = "#{Rails.root}/tmp/db/editions.#{Rails.env}.#{timestamp}.sql.gz"
     cmd = "mysqldump #{mysqlargs} | gzip > #{backup}"
     sh %{mkdir -p `dirname #{backup}` && (#{cmd})}
   end
