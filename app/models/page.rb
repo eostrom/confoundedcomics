@@ -33,14 +33,14 @@ class Page < ActiveRecord::Base
     self[:published_at] = time && time.to_date
   end
 
-  named_scope :before, lambda { |finish|
+  scope :before, lambda { |finish|
     finish = finish.published_at if Page === finish
-    { :conditions => ['published_at < ?', finish] }
+    where('published_at < ?', finish)
   }
 
-  named_scope :after, lambda { |start|
+  scope :after, lambda { |start|
     start = start.published_at if Page === start
-    { :conditions => ['published_at > ?', start] }
+    where('published_at > ?', start)
   }
 
   def first_predecessor
@@ -70,8 +70,8 @@ class Page < ActiveRecord::Base
     published.last
   end
 
-  named_scope :published, lambda {
-    { :conditions => ['published_at <= ?', Time.zone.now] }
+  scope :published, lambda {
+    where('published_at <= ?', Time.zone.now)
   }
 
   # --- Permissions --- #

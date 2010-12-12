@@ -20,8 +20,8 @@ class Book < ActiveRecord::Base
     title.downcase.gsub(/\s+/, '_')
   end
 
-  named_scope :published, lambda {
-    { :conditions => ['published_at <= ?', Time.zone.now] }
+  scope :published, lambda {
+    where('published_at <= ?', Time.zone.now)
   }
 
   scope :descend_by_published_at, order('published_at DESC')
