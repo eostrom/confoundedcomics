@@ -1,5 +1,5 @@
 Then /^print the page$/ do
-  puts response.body
+  puts body
 end
 
 Then /^where am I\?$/ do
