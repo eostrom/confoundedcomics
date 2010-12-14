@@ -1,5 +1,4 @@
 <include src="rapid" plugin="hobo"/>
-<include src="paperclip" plugin="paperclip_with_hobo"/>
 
 <include src="taglibs/auto/rapid/cards"/>
 <include src="taglibs/auto/rapid/pages"/>
