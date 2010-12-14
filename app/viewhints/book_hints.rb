@@ -1,4 +1,4 @@
-class BookHints < Hobo::ViewHints
+class BookHints < Hobo::Model::ViewHints
 
   children :pages
 
