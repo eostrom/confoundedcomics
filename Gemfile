@@ -35,6 +35,8 @@ gem 'paperclip', '~> 2.3.3'
 gem 'haml', '~> 3.0.16'
 gem 'friendly_id', '~> 3.1.7'
 
+# TODO: extract gems shared by test and cucumber
+
 group :test do
   gem 'shoulda', '~> 2.11.3'
   gem 'factory_girl_rails', '~> 1.0'
@@ -46,4 +48,5 @@ group :cucumber do
   gem 'database_cleaner', '~> 0.5.2'
   gem 'capybara', '~> 0.3.9'
   gem 'factory_girl_rails', '~> 1.0'
+  gem 'faker', '~> 0.3.1'
 end
