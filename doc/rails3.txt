@@ -1,0 +1,249 @@
+[reconstructed from memory]
+
+0. Have written tests.
+
+1. gem install hobo --pre
+2. gem cleanup
+3. rake rails:unfreeze
+4. [from parent directory] hobo new comics -G -d mysql
+   ("a" to overwrite all; we can reconstruct with git)
+   (don't run hobo setup)
+
+***
+
+Add to .gitignore:
+
+  .bundle
+
+***
+
+rm README
+rm public/index.html
+
+[actual documentation]
+
+***
+
+/Users/eostrom/.rvm/gems/ruby-1.8.7-p299@comics/gems/hobo_support-1.3.0.pre9/lib/hobo_support/fixes/module.rb:14:in `alias_method': undefined method `has_attached_file' for module `Paperclip::ClassMethods' (NameError)
+
+Add to Gemfile:
+
+  gem "paperclip", :version => "~> 2.3.3"
+
+Could have saved a lot of steps here by just adding the list of gems in
+my old config/environment.rb and config/environments/*.rb to Gemfile.
+
+***
+
+DEPRECATION WARNING: ActionController::Base.cookie_verifier_secret= is deprecated. Please configure it on your application with config.secret_token=. (called from /Users/eostrom/workspace/confoundedcontraption/comics/config/initializers/cookie_verification_secret.rb:7)
+
+Copy the secret token from config/initializers/cookie_verification_secret.rb to config/initializers/secret_token.rb. Delete cookie_verification_secret.rb.
+
+***
+
+/Users/eostrom/workspace/confoundedcontraption/comics/config/initializers/hobo.rb:1: uninitialized constant Hobo::ModelRouter (NameError)
+
+  rm config/initializers/hobo.rb
+
+***
+
+/Users/eostrom/workspace/confoundedcontraption/comics/config/initializers/new_rails_defaults.rb:14: undefined method `generate_best_match=' for ActionDispatch::Routing:Module (NoMethodError)
+
+  rm config/initializers/new_rails_defaults.rb
+
+***
+
+/Users/eostrom/workspace/confoundedcontraption/comics/config/initializers/sass.rb:1: uninitialized constant Sass (NameError)
+
+Add to Gemfile:
+
+  gem 'haml', '~> 3.0.16'
+
+***
+
+/Users/eostrom/.rvm/gems/ruby-1.8.7-p299@comics/gems/activerecord-3.0.0/lib/active_record/base.rb:1016:in `method_missing': undefined method `has_friendly_id' for #<Class:0x24eaaa0> (NoMethodError)
+
+Add to Gemfile:
+
+  gem 'friendly_id', '~> 2.3.4'
+
+Oops! Need to update friendly_id for Rails 3:
+
+  gem 'friendly_id', '~> 3.1.7'
+
+***
+
+/Users/eostrom/workspace/confoundedcontraption/comics/app/controllers/admin/books_controller.rb:3:in `hobo_model_controller': wrong number of arguments (1 for 0) (ArgumentError)
+
+Removed the class from this line:
+
+  hobo_model_controller Book
+
+Same for other controllers.
+
+At this point autotest stopped being completely unable to function,
+and started responding to individual file changes.
+
+***
+
+/Users/eostrom/.rvm/gems/ruby-1.8.7-p299@comics/gems/activesupport-3.0.0/lib/active_support/dependencies.rb:492:in `load_missing_constant': Expected /Users/eostrom/workspace/confoundedcontraption/comics/app/models/guest.rb to define Guest (LoadError)
+
+Changed this line:
+
+  class Guest < Hobo::Guest
+
+to:
+
+  class Guest < Hobo::Model::Guest
+
+***
+
+./test/functional/pages_controller_test.rb:4: undefined method `context' for PagesControllerTest:Class (NoMethodError)
+
+This means we're able to load the Rails/Hobo environment, and have moved on
+to trouble loading the tests.
+
+group :test do
+  gem 'shoulda', '~> 2.11.3'
+end
+
+***
+
+NoMethodError: undefined method `login_as' for #<Admin::PagesControllerTest:0x39951a8>
+
+Rails 3 overwrote test_helper.rb, so I had to reconstruct it, by adding
+a definition of login_as, and by removing the `fixtures` call.
+
+***
+
+NameError: uninitialized constant BookTest::Factory
+
+gem 'factory_girl_rails', '~> 1.0'
+
+***
+
+NameError: uninitialized constant Faker
+
+gem 'faker', '~> 0.3.1'
+
+***
+
+NoMethodError: undefined method `descend_by_published_at' for []:ActiveRecord::Relation
+
+Searchlogic doesn't seem to work with Rails 3. As it happens I was
+only using one Searchlogic scope, so for now I just reimplemented it
+manually. I hear Metasearch is nice.
+
+***
+
+ActionView::Template::Error: undefined local variable or method `root_path' for #<#<Class:0x385a84c>:0x3720814>
+
+ActionController::RoutingError: No route matches {:action=>"show", :controller=>"books", :id=>750}
+
+I let `hobo new` overwrite `config/routes.rb`. Time to reconstruct it...
+and upgrade it. Should've used `rake rails:upgrade:routes` before I
+started, but it looks like it's too late. Oh well, a chance to learn.
+
+***
+
+Added Gemfile.lock to version control, as per
+
+  http://gembundler.com/rationale.html
+
+***
+
+Deleted everything in `script` except `rails` and my own scripts.
+
+***
+
+-2010-08-08T00:00:00-07:00
++2010-08-08T00:00:00Z">.
+
+This happens when generating an Atom feed for a model whose 'published'
+date is stored as a Date in the database. In this case we want it to
+use local time, and it used to do so by default, but now we have to do
+it explicitly. In index.atom.builder, instead of:
+
+  :published => page.published_at
+
+we now do:
+
+  :published => page.published_at.to_time(:local)
+
+***
+
+Cucumber time!
+
+undefined local variable or method `config' for main:Object (NameError)
+
+Converted `config/environments/cucumber.rb`:
+
+  * moved gem requirements into a :cucumber group in Gemfile
+  * wrapped the rest in a Comics::Application.configure block
+  * added deprecation notice preference (see test.rb)
+
+***
+
+cucumber database is not configured (ActiveRecord::AdapterNotSpecified)
+
+Rails 3 overwrote `config/database.yml`. Reconfigure the cucumber
+environment.
+
+***
+
+Abort testing: Your Rails environment is not running in test mode!
+
+Uh-oh, time to upgrade cucumber.
+
+  bundle update cucumber-rails
+
+Didn't actually update cucumber-rails, I was already using 0.3.2. Did
+update cucumber and gherkin. Huh.
+
+  RAILS_ENV=cucumber rails generate cucumber:install --capybara --testunit
+
+All this did was make `features/support/env.rb` use the `test`
+environment instead of `cucumber`.
+
+***
+
+Dryml::DrymlException: No such taglib: /Users/eostrom/workspace/confoundedcontraption/comics/app/views/taglibs {:type=>:include, :plugin=>"paperclip_with_hobo", :template_dir=>"app/views/taglibs", :src=>"paperclip"} /Users/eostrom/workspace/confoundedcontraption/comics/app/views/taglibs/paperclip.dryml
+
+No input tag for comic:Paperclip::Attachment
+(this=#<Paperclip::Attachment:0x368e2d4 @processors=[:thumbnail],
+@whiny=true, @errors={}, @storage=:filesystem, @name=:comic,
+@styles={}, @queued_for_write={}, @convert_options={},
+@default_style=:original, @instance=#<Page id: nil, title: nil,
+commentary: nil, published_at: nil, created_at: nil, updated_at: nil,
+book_id: nil, comic_file_name: nil, comic_content_type: nil,
+comic_file_size: nil, comic_updated_at: nil>,
+@storage_module=Paperclip::Storage::Filesystem,
+@options={:storage=>:filesystem, :path=>":rails_root/public:url",
+:processors=>[:thumbnail], :styles=>{}, :default_style=>:original,
+:whiny=>true, :url=>"/system/:attachment/:id/:style/:filename",
+:default_url=>"/:attachment/:style/missing.png", :convert_options=>{},
+:validations=>[]}, @default_url="/:attachment/:style/missing.png",
+@queued_for_delete=[], @path=":rails_root/public:url", @dirty=false,
+@url="/system/:attachment/:id/:style/:filename",
+@normalized_styles=nil>)
+
+TK
+
+***
+
+DEPRECATION WARNING: Base.named_scope has been deprecated, please use Base.scope instead. (called from /Users/eostrom/workspace/confoundedcontraption/comics/app/models/book.rb:23)
+
+TK
+
+***
+
+NoMethodError (undefined method `request_host' for Hobo::Controller:Module):
+  app/models/user_mailer.rb:4:in `forgot_password'
+  app/models/user.rb:28
+
+  rm app/models/user_mailer.rb (so the generator will run)
+  rails g hobo:user_mailer -i
+
+***
+
+[this is where I stopped keeping track]
