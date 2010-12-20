@@ -1,5 +1,0 @@
-<show-page>
-  <prepend-content-body:>
-    <%= image_tag(@page.comic.url) %>
-  </prepend-content-body:>
-</show-page>

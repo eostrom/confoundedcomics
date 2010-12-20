@@ -12,7 +12,3 @@ user = 'confoundedcomics'
 #sudo = false
 #cache_dirs = %w(public/cache)
 #skip_steps = nil
-
-before_restarting_server do
-  rake "RAILS_ENV=#{environment} hobo:generate_taglibs"
-end

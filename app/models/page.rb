@@ -1,6 +1,6 @@
 class Page < ActiveRecord::Base
 
-  hobo_model # Don't put anything above this
+  include HoboFields
 
   fields do
     title        :string

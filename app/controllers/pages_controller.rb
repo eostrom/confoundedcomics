@@ -1,8 +1,4 @@
 class PagesController < ApplicationController
-  hobo_model_controller
-  # Disable Hobo so I can use my Rails skillz.
-  auto_actions
-
   def index
     @book = Book.find(params[:book_id])
     @pages = @book.pages.find(:all,

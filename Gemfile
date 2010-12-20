@@ -28,7 +28,7 @@ gem 'mysql2'
 # group :development, :test do
 #   gem 'webrat'
 # end
-gem "hobo", ">= 1.3.0.pre23"
+gem "hobo_fields", ">= 1.3.0.pre23"
 
 # comics stuff
 gem 'paperclip', '~> 2.3.3'
