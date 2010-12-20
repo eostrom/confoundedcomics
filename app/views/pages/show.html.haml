@@ -1,50 +1,23 @@
-!!!
-%html
-  %head
-    /
-      Template adapted from the wonderful Hark, A Vagrant!
-      http://www.harkavagrant.com/
+#banner
+  = banner_link(@book)
 
-    %title #{h(@book.title)} - Confounded Contraption
-    = auto_discovery_link_tag(:atom, pages_path(:book_id => @book))
-    = stylesheet_link_tag("comics.css")
-    = stylesheet_link_tag("books/#{@book.style}.css")
-    = javascript_include_tag('prototype', 'lowpro', 'application')
-    /[if lt IE 9]
-      %script(src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js")
+#comic
+  = image_tag(@page.comic.url, :alt => h(@page.title))
 
-  %body
-    #banner
-      = banner_link(@book)
+-# TODO: make these look right on IE 7
+%ul#page_nav
+  %li>= first_page_link(@page)
+  %li>= previous_page_link(@page)
+  %li>= next_page_link(@page)
+  %li>= last_page_link(@page)
 
-    #comic
-      = image_tag(@page.comic.url, :alt => h(@page.title))
+#archive
+  %h2= link_to 'Archive', '#pages'
+  %ol#pages
+    - @book.pages.each do |page|
+      %li= link_to_unless page == @page, h(page.title), page
 
-    -# TODO: make these look right on IE 7
-    %ul#page_nav
-      %li>= first_page_link(@page)
-      %li>= previous_page_link(@page)
-      %li>= next_page_link(@page)
-      %li>= last_page_link(@page)
-
-    #archive
-      %h2= link_to 'Archive', '#pages'
-      %ol#pages
-        - @book.pages.each do |page|
-          %li= link_to_unless page == @page, h(page.title), page
-
-    #news
-      %p.date= @page.published_at
-      - if @page.commentary.present?
-        = simple_format(@page.commentary)
-
-    %ul#site_nav
-      %li.home= link_to 'Home', 'http://confoundedcontraption.com/'
-      %li.comix= link_to 'Comix', root_path
-      %li.tips
-        = render :partial => 'shared/tipjar'
-      %li.store= link_to 'Store', 'http://katesaturday.etsy.com/'
-      %li.contact= link_to 'Contact', 'mailto:kate@confoundedcontraption.com'
-
-    %p#copyright
-      &copy; 2004-2010 Kate Stewart
+#news
+  %p.date= @page.published_at
+  - if @page.commentary.present?
+    = simple_format(@page.commentary)
