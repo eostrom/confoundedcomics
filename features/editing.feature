@@ -4,13 +4,12 @@ Feature: Editing comics
   wants to upload and edit comics
 
   Scenario: Log in
-    Given the following users exist:
-        | Email Address     | Password |
-        | admin@example.com | Admin    |
+    Given the following administrators exist:
+        | Email             | Password |
+        | admin@example.com | Admin1   |
      When I go to the login page
-# TODO: semantic form
-      And I fill in "login" with "admin@example.com"
-      And I fill in "password" with "Admin"
-      And I press "Log in"
+      And I fill in "Email" with "admin@example.com"
+      And I fill in "Password" with "Admin1"
+      And I press "Sign in"
      Then I should be on the home page
-# TODO: And I should see "Account"
+      And I should see "Signed in"
