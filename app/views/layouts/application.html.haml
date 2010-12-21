@@ -10,7 +10,7 @@
     = stylesheet_link_tag("comics.css")
     - if @book
       = stylesheet_link_tag("books/#{@book.style}.css")
-    = javascript_include_tag('prototype', 'lowpro', 'application')
+    = javascript_include_tag('application')
     /[if lt IE 9]
       %script(src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js")
 
