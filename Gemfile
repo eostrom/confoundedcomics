@@ -30,6 +30,8 @@ gem 'mysql2'
 # end
 gem "hobo_fields", ">= 1.3.0.pre23"
 
+gem 'devise', '~> 1.1.5'
+
 # comics stuff
 gem 'paperclip', '~> 2.3.3'
 gem 'haml', '~> 3.0.16'
