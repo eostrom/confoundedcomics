@@ -48,7 +48,7 @@ Comics::Application.routes.draw do
   #     resources :products
   #   end
 
-  resources :books, :only => [:index, :show]
+  resources :books, :only => [:index, :show, :new]
   resources :pages, :only => [:index, :show]
   root :to => "books#index"
 

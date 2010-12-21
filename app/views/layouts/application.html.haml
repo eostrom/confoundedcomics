@@ -21,6 +21,10 @@
 
     = yield
 
+    - if administrator_signed_in?
+      %ul#admin_nav
+        = content_for :admin_nav
+
     %ul#site_nav
       %li.home= link_to 'Home', 'http://confoundedcontraption.com/'
       %li.comix= link_to 'Comix', root_path

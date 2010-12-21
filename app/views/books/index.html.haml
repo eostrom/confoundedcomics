@@ -1,4 +1,6 @@
 %ol.books
   - @books.each do |book|
-    %li
-      = link_to h(book.title), book_path(book)
+    %li= link_to h(book.title), book_path(book)
+
+- content_for :admin_nav do
+  %li= link_to 'New book', new_book_path
