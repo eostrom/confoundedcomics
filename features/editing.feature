@@ -19,9 +19,11 @@ Feature: Editing comics
 
      When I go to the home page
       And I follow "New book"
-      And I fill in the book form for "Book 1"
+      And I fill in "Title" with "Book 1"
+      And I fill in "Description" with "The first book."
+      And I attach the file "features/pictures/banner.jpg" to "Banner"
       And I press "Save"
-     Then I should be on the new page page for "Book 1" page
+     Then I should be on the new page page
 
      When I fill in the page form for "Page 1"
       And I press "Save"

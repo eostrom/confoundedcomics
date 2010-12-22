@@ -24,4 +24,10 @@ class BookTest < ActiveSupport::TestCase
       end
     end
   end
+
+  context 'An untitled Book' do
+    setup { @book = Factory.build(:book, :title => nil) }
+
+    should('have no style') { assert !@book.style }
+  end
 end

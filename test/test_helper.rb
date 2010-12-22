@@ -9,3 +9,7 @@ class ActiveSupport::TestCase
     @controller.send(:current_user=, user)
   end
 end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
