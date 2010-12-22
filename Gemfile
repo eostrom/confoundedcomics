@@ -36,6 +36,7 @@ gem 'devise', '~> 1.1.5'
 gem 'paperclip', '~> 2.3.3'
 gem 'haml', '~> 3.0.16'
 gem 'friendly_id', '~> 3.1.7'
+gem 'formtastic', '~> 1.2.2'
 
 # TODO: extract gems shared by test and cucumber
 

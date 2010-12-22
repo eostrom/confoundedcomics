@@ -7,7 +7,7 @@
 
     %title #{@book ? h(@book.title) : 'Comix'} - Confounded Contraption
     = auto_discovery_link_tag(:atom, pages_path(:book_id => @book))
-    = stylesheet_link_tag("comics.css")
+    = stylesheet_link_tag 'formtastic', 'comics'
     - if @book
       = stylesheet_link_tag("books/#{@book.style}.css")
     = javascript_include_tag('application')
