@@ -42,6 +42,52 @@ class PagesControllerTest < ActionController::TestCase
     end
   end
 
+  context 'new' do
+    setup do
+      @book = Factory.create(:book)
+      @params = { :book_id => @book.id }
+      @action = lambda { get :new, @params }
+    end
+
+    context '(signed in)' do
+      setup do
+        sign_in Factory.create(:administrator)
+        @action.call
+      end
+
+      should respond_with(:success)
+      should render_template(:new)
+    end
+  end
+
+  context 'create' do
+    setup do
+      @book = Factory.create(:book)
+      @action = lambda { get :new, @params }
+
+      sign_in Factory.create(:administrator)
+
+      @params = { :book_id => @book.id, :page => Factory.attributes_for(:page)}
+      @action = lambda { post :create, @params }
+    end
+
+    context 'with valid params' do
+      setup { @action.call }
+
+      should assign_to(:page).with_kind_of(Page)
+      should redirect_to('the page') { page_url(assigns[:page]) }
+    end
+
+    # TODO: require at least one field
+    context 'with invalid params' do
+      setup { @params[:page] = {}; @action.call }
+
+      should assign_to(:page).with(nil)
+      should render_template(:new)
+    end
+  end
+
+  # TODO: redesign URLs
   context 'page_path' do
     setup do
       @book = Factory.create(:book, :title => 'Book 1')

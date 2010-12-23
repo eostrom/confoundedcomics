@@ -11,12 +11,12 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
     when /the book "(.*)"/
-      # book_path(Book.find_by_title($1))
-      page_path(Book.find_by_title($1).pages.latest)
+      page_path(find_for_path(Book, :title => $1).pages.latest)
     when /the page "(.*)"/
-      page_path(Page.find_by_title($1))
+      page_path(find_for_path(Page, :title => $1))
     when /(page )?"(.*)" (of|from) "(.*)"/
-      page = Book.find_by_title($4).pages.find_by_title($2)
+      book = find_for_path(Book, :title => $4)
+      page = find_for_path(book.pages, :title => $2)
       if !page
         page = Page.find_by_title($2)
         fail %{Page "#{$2}" not found in book "#{$4}"} +
@@ -41,6 +41,11 @@ module NavigationHelpers
           "Now, go and add a mapping in #{__FILE__}"
       end
     end
+  end
+
+  def find_for_path(scope, conditions)
+    scope.where(conditions).first ||
+      raise("Can't find #{conditions.inspect} in #{scope}")
   end
 end
 

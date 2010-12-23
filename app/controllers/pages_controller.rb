@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_filter :authenticate_administrator!, :except => [:index, :show]
+
   def index
     @book = Book.find(params[:book_id])
     @pages = @book.pages.find(:all,
@@ -14,5 +16,21 @@ class PagesController < ApplicationController
     @book = @page.book
 
     render :show
+  end
+
+  def new
+    @book = Book.find(params[:book_id])
+    @page = @book.pages.build(params[:page])
+  end
+
+  def create
+    @book = Book.find(params[:book_id])
+    @page = @book.pages.build(params[:page])
+
+    if @page.save
+      redirect_to page_path(@page)
+    else
+      render :action => 'new'
+    end
   end
 end

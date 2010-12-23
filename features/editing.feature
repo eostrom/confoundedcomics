@@ -25,7 +25,9 @@ Feature: Editing comics
       And I press "Save"
      Then I should be on the new page page
 
-     When I fill in the page form for "Page 1"
+     When I fill in "Title" with "Page 1"
+      And I fill in "Commentary" with "The first page."
+      And I attach the file "features/pictures/comic.jpg" to "Comic"
       And I press "Save"
      Then I should be on the page "Page 1"
       And the page should be unpublished
@@ -38,7 +40,7 @@ Feature: Editing comics
      When I follow "New page"
       And I fill in the page form for "Page 2"
       And I press "Save and add another"
-     Then I should be on the new page page for "Book 1"
+     Then I should be on the new page page
 
      When I follow "Page 1"
      Then I should see "Next" within ".unpublished"

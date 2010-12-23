@@ -1,0 +1,9 @@
+= semantic_form_for @page, :html => {:class => 'admin', :multipart => true} do |form|
+  -# TODO: use a form field once we redesign URLs
+  = hidden_field_tag :book_id, @page.book_id
+  = form.input :title
+  = form.input :commentary
+  = form.input :published_at, :label => 'Publish date'
+  = form.input :comic
+  = form.buttons do
+    = form.commit_button

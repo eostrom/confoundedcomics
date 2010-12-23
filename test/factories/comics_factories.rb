@@ -4,4 +4,5 @@ end
 
 Factory.define(:page) do |page|
   page.association :book, :factory => :book
+  page.comic_file_name 'AComic.jpg'
 end

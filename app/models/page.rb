@@ -9,6 +9,9 @@ class Page < ActiveRecord::Base
     timestamps
   end
 
+  has_attached_file :comic
+  validates_attachment_presence :comic
+
   belongs_to :book
   validates_presence_of :book
 
@@ -64,8 +67,6 @@ class Page < ActiveRecord::Base
     book.pages.published.after(self).last
   end
 
-  has_attached_file :comic
-
   def self.latest
     published.last
   end
@@ -73,23 +74,4 @@ class Page < ActiveRecord::Base
   scope :published, lambda {
     where('published_at <= ?', Time.zone.now)
   }
-
-  # --- Permissions --- #
-
-  def create_permitted?
-    acting_user.administrator?
-  end
-
-  def update_permitted?
-    acting_user.administrator?
-  end
-
-  def destroy_permitted?
-    acting_user.administrator?
-  end
-
-  def view_permitted?(field)
-    acting_user.administrator?
-  end
-
 end
