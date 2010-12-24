@@ -12,10 +12,19 @@ class PagesController < ApplicationController
   end
 
   def show
-    @page = params[:id] ? Page.published.find(params[:id]) : Page.latest
+    scope = administrator_signed_in? ? Page : Page.published
+    @page = scope.find(params[:id])
     @book = @page.book
 
-    render :show
+    render :action => 'show'
+  rescue ActiveRecord::RecordNotFound
+    unless scope.empty?
+      flash[:warning] =
+        "Can't find the page you're looking for, but here's the latest!"
+    end
+
+    # TODO: don't just show a page from a random book!
+    redirect_to(scope.latest || root_url)
   end
 
   def new

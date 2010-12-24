@@ -70,7 +70,7 @@ class Page < ActiveRecord::Base
   end
 
   def self.latest
-    published.last
+    last
   end
 
   def published?

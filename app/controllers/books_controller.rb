@@ -7,8 +7,12 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.published.find(params[:id])
+    scope = administrator_signed_in? ? @book.pages : @book.pages.published
 
-    redirect_to @book.pages.latest
+    redirect_to scope.latest
+  rescue ActiveRecord::RecordNotFound
+    "Can't find the page you're looking for. Try these books instead!"
+    redirect_to(root_url)
   end
 
   def new

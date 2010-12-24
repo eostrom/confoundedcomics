@@ -25,7 +25,8 @@ class PagesControllerTest < ActionController::TestCase
 
   context 'show' do
     setup do
-      @book = Factory.create(:book, :title => 'A Book')
+      @book = Factory.create(:book,
+        :published_at => 2.days.ago, :title => 'A Book')
       @page = Factory.create(:page,
         :published_at => 2.days.ago, :book => @book)
 
@@ -39,6 +40,31 @@ class PagesControllerTest < ActionController::TestCase
       @action.call
 
       assert_select('title', 'A Book - Confounded Contraption')
+    end
+
+    context 'an unpublished page' do
+      setup { @page.update_attributes!(:published_at => 1.day.from_now) }
+
+      context 'to an administrator' do
+        setup do
+          sign_in Factory.create(:administrator)
+
+          @action.call
+        end
+
+        should render_template(:show)
+      end
+
+      context 'to the general public' do
+        setup do
+          @latest = Factory.create(:page,
+            :published_at => 1.day.ago, :book => @book)
+
+          @action.call
+        end
+
+        should redirect_to('the latest page') { @latest }
+      end
     end
   end
 

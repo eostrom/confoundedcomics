@@ -21,16 +21,25 @@ class BooksControllerTest < ActionController::TestCase
     setup do
       @book = Factory.create(:book, :title => 'A Book',
         :published_at => 2.days.ago)
-      @page = Factory.create(:page, :book => @book,
+      @published = Factory.create(:page, :book => @book,
         :published_at => 2.days.ago)
-      Factory.create(:page, :book => @book,
+      @unpublished = Factory.create(:page, :book => @book,
         :published_at => 2.days.from_now)
       Factory.create(:page, :book => @book)
 
-      get :show, :id => @book.id
+      @params = {:id => @book.id}
+      @action = lambda { get :show, @params }
     end
 
-    should redirect_to('the latest published page') { @page }
+    context '(signed in)' do
+      setup { sign_in Factory.create(:administrator); @action.call }
+      # should redirect_to('the latest page') { @unpublished }
+    end
+
+    context '(signed out)' do
+      setup { sign_out :administrator; @action.call }
+      should redirect_to('the latest published page') { @published }
+    end
   end
 
   context 'new' do
