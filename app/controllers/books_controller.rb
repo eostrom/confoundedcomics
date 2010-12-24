@@ -6,10 +6,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.published.find(params[:id])
-    scope = administrator_signed_in? ? @book.pages : @book.pages.published
+    @book = Book.visible_to(current_administrator).find(params[:id])
+    @page = @book.pages.visible_to(current_administrator).latest
 
-    redirect_to [@book, scope.latest]
+    redirect_to [@book, @page]
   rescue ActiveRecord::RecordNotFound
     "Can't find the book you're looking for. Try these books instead!"
     redirect_to(root_url)
