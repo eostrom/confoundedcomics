@@ -48,9 +48,9 @@ Comics::Application.routes.draw do
   #     resources :products
   #   end
 
-  # TODO: redesign URLs
-  resources :books, :only => [:index, :show, :new, :create]
-  resources :pages, :only => [:index, :show, :new, :create]
+  resources :books, :only => [:index, :show, :new, :create] do
+    resources :pages, :only => [:index, :show, :new, :create]
+  end
   root :to => "books#index"
 
   # See how all your routes lay out with "rake routes"

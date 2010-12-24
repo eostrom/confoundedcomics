@@ -23,7 +23,7 @@ Feature: Editing comics
       And I fill in "Description" with "The first book."
       And I attach the file "features/pictures/banner.jpg" to "Banner"
       And I press "Save"
-     Then I should be on the new page page
+     Then I should be on the new page page for "Book 1"
 
      When I fill in "Title" with "Page 1"
       And I fill in "Commentary" with "The first page."

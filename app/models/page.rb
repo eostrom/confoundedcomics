@@ -19,13 +19,12 @@ class Page < ActiveRecord::Base
 
   default_scope :order => 'published_at ASC'
 
-  has_friendly_id :book_date_title, :use_slug => true
-  def book_date_title
+  has_friendly_id :date_title, :use_slug => true
+  def date_title
     [
-      book.to_param,
-      published_at,
+      published_at || id || 'page',
       (FriendlyId::SlugString.new(title).normalize! if title.present?)
-    ].compact.join(':')
+    ].compact.join('-')
   end
   def normalize_friendly_id(text); text; end
 

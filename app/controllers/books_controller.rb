@@ -9,9 +9,9 @@ class BooksController < ApplicationController
     @book = Book.published.find(params[:id])
     scope = administrator_signed_in? ? @book.pages : @book.pages.published
 
-    redirect_to scope.latest
+    redirect_to [@book, scope.latest]
   rescue ActiveRecord::RecordNotFound
-    "Can't find the page you're looking for. Try these books instead!"
+    "Can't find the book you're looking for. Try these books instead!"
     redirect_to(root_url)
   end
 
@@ -22,7 +22,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(params[:book])
     if @book.save
-      redirect_to new_page_path(:book_id => @book)
+      redirect_to new_book_page_path(@book)
     else
       render :action => 'new'
     end

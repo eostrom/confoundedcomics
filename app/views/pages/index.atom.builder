@@ -4,6 +4,7 @@ atom_feed do |feed|
 
   for page in @pages
     entry_params = {
+      :url => [page.book, page],
       :published => page.published_at.to_time(:local)
     }
 

@@ -12,19 +12,20 @@ class PagesController < ApplicationController
   end
 
   def show
-    scope = administrator_signed_in? ? Page : Page.published
-    @page = scope.find(params[:id])
-    @book = @page.book
+    @book = Book.visible_to(current_administrator).find(params[:book_id])
+    @page = @book.pages.visible_to(current_administrator).find(params[:id])
 
     render :action => 'show'
   rescue ActiveRecord::RecordNotFound
-    unless scope.empty?
+    if @book && @book.pages.visible_to(current_administrator).present?
       flash[:warning] =
         "Can't find the page you're looking for, but here's the latest!"
+      redirect_to [@book, @book.pages.visible_to(current_administrator).latest]
+    else
+      flash[:warning] =
+        "Can't find the page you're looking for. Try these books instead!"
+      redirect_to(root_url)
     end
-
-    # TODO: don't just show a page from a random book!
-    redirect_to(scope.latest || root_url)
   end
 
   def new
@@ -37,7 +38,7 @@ class PagesController < ApplicationController
     @page = @book.pages.build(params[:page])
 
     if @page.save
-      redirect_to page_path(@page)
+      redirect_to [@book, @page]
     else
       render :action => 'new'
     end

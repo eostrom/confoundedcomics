@@ -11,9 +11,11 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
     when /the book "(.*)"/
-      page_path(find_for_path(Book, :title => $1).pages.latest)
+      book = find_for_path(Book, :title => $1)
+      book_page_path(book, book.pages.latest)
     when /the page "(.*)"/
-      page_path(find_for_path(Page, :title => $1))
+      page = find_for_path(Page, :title => $1)
+      book_page_path(page.book, page)
     when /(page )?"(.*)" (of|from) "(.*)"/
       book = find_for_path(Book, :title => $4)
       page = find_for_path(book.pages, :title => $2)
@@ -23,13 +25,13 @@ module NavigationHelpers
           (%{ (found in book "#{page.book.title}")} if page)
       end
 
-      page_path(page)
+      book_page_path(book, page)
 
     when /the login page/
       new_administrator_session_path
 
-    when /the new page page/
-      new_page_path
+    when /the new page page for "(.*)"/
+      new_book_page_path(find_for_path(Book, :title => $1))
 
     else
       begin

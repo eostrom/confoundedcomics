@@ -30,4 +30,28 @@ class BookTest < ActiveSupport::TestCase
 
     should('have no style') { assert !@book.style }
   end
+
+  context 'A published Book' do
+    setup { @book = Factory.create(:book, :published_at => 1.day.ago) }
+
+    should 'be visible to everyone' do
+      admin = Factory.create(:administrator)
+      assert @book.visible_to(admin)
+      assert Book.visible_to(admin).find(@book)
+      assert @book.visible_to(nil)
+      assert Book.visible_to(nil).include? @book
+    end
+  end
+
+  context 'An published Book' do
+    setup { @book = Factory.create(:book, :published_at => 1.day.from_now) }
+
+    should 'be visible only to administrators' do
+      admin = Factory.create(:administrator)
+      assert @book.visible_to(admin)
+      assert Book.visible_to(admin).find(@book)
+      assert !@book.visible_to(nil)
+      assert !(Book.visible_to(nil).include? @book)
+    end
+  end
 end

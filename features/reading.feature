@@ -5,8 +5,8 @@ Feature: Reading comics!
 
   Scenario: Read a page
     Given the following books exist:
-        | Title  | Banner file name |
-        | Book 1 | banner.jpg       |
+        | Title  | Banner file name | Published At |
+        | Book 1 | banner.jpg       |   2010-08-01 |
       And the following pages exist:
         | Title  | Commentary       | Published At | Book          |
         | Page 1 | The first page.  |   2010-08-01 | Title: Book 1 |
@@ -19,6 +19,9 @@ Feature: Reading comics!
      Then I should be on the page "Page 1"
 
   Scenario: Browse sequentially
+    Given the following books exist:
+        | Title  | Published At |
+        | Book 1 |   2010-08-01 |
     Given the following pages exist:
         | Title  | Commentary       | Published At | Book          |
         | Page 1 | The first page.  |   2010-08-01 | Title: Book 1 |
@@ -46,7 +49,10 @@ Feature: Reading comics!
      Then I should be on the page "Page 3"
 
   Scenario: Jump to a page
-    Given the following pages exist:
+    Given the following books exist:
+        | Title  | Published At |
+        | Book 1 |   2010-08-01 |
+      And the following pages exist:
         | Title  | Commentary       | Published At | Book          |
         | Page 1 | The first page.  |   2010-08-01 | Title: Book 1 |
         | Page 2 | The second page. |   2010-08-02 | Title: Book 1 |

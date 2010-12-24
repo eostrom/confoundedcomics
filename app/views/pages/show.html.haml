@@ -1,3 +1,4 @@
+-# - admin_unless(@page.published? && @book.published?, :content) do
 #banner
   = banner_link(@book)
 
@@ -15,7 +16,7 @@
   %h2= link_to 'Archive', '#pages'
   %ol#pages
     - @book.pages.each do |page|
-      %li= link_to_unless page == @page, h(page.title), page
+      %li= link_to_unless page == @page, h(page.title), [@book, page]
 
 #news
   %p.date= @page.published_at

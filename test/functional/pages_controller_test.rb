@@ -26,11 +26,12 @@ class PagesControllerTest < ActionController::TestCase
   context 'show' do
     setup do
       @book = Factory.create(:book,
+        :banner_file_name => 'banner.jpg',
         :published_at => 2.days.ago, :title => 'A Book')
       @page = Factory.create(:page,
         :published_at => 2.days.ago, :book => @book)
 
-      @params = { :id => @page }
+      @params = { :book_id => @book, :id => @page }
       @action = lambda { get :show, @params }
     end
 
@@ -40,6 +41,23 @@ class PagesControllerTest < ActionController::TestCase
       @action.call
 
       assert_select('title', 'A Book - Confounded Contraption')
+    end
+
+    context 'given multiple pages' do
+      setup do
+        @first = Factory.create(:page,
+          :published_at => 3.days.ago, :book => @book)
+        @last = Factory.create(:page,
+          :published_at => 1.day.ago, :book => @book)
+        @action.call
+      end
+
+      should 'link between them' do
+        assert_select 'a[href=?]', book_page_path(@book, @first), 'First'
+        assert_select 'a[href=?]', book_page_path(@book, @first), 'Previous'
+        assert_select 'a[href=?]', book_page_path(@book, @last), 'Next'
+        assert_select 'a[href=?]', book_page_path(@book, @last), 'Last'
+      end
     end
 
     context 'an unpublished page' do
@@ -63,7 +81,28 @@ class PagesControllerTest < ActionController::TestCase
           @action.call
         end
 
-        should redirect_to('the latest page') { @latest }
+        should redirect_to('the latest page') { [@book, @latest] }
+      end
+    end
+
+    context 'a page from an unpublished book' do
+      setup do
+        @book.update_attributes!(:published_at => 1.day.from_now)
+      end
+
+      context 'to an administrator' do
+        setup do
+          sign_in Factory.create(:administrator)
+          @action.call
+        end
+
+        should render_template(:show)
+      end
+
+      context 'to the general public' do
+        setup { @action.call }
+
+        should redirect_to('the home page') { root_path }
       end
     end
   end
@@ -101,10 +140,9 @@ class PagesControllerTest < ActionController::TestCase
       setup { @action.call }
 
       should assign_to(:page).with_kind_of(Page)
-      should redirect_to('the page') { page_url(assigns[:page]) }
+      should redirect_to('the page') { [assigns[:page].book, assigns[:page]] }
     end
 
-    # TODO: require at least one field
     context 'with invalid params' do
       setup { @params[:page] = {}; @action.call }
 
@@ -113,7 +151,6 @@ class PagesControllerTest < ActionController::TestCase
     end
   end
 
-  # TODO: redesign URLs
   context 'page_path' do
     setup do
       @book = Factory.create(:book, :title => 'Book 1')
@@ -122,14 +159,17 @@ class PagesControllerTest < ActionController::TestCase
     end
 
     should 'generate a book-and-page URL' do
-      assert_equal '/pages/book-1:2010-08-08:page-1', page_path(@page)
+      assert_equal('/books/book-1/pages/2010-08-08-page-1',
+        book_page_path(@book, @page))
+
       assert_recognizes(
         {
           :controller => 'pages',
           :action => 'show',
+          :book_id => 'book-1',
           :id => @page.to_param
         },
-        '/pages/book-1:2010-08-08:page-1')
+        '/books/book-1/pages/2010-08-08-page-1')
     end
   end
 end

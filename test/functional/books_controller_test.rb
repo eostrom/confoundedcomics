@@ -38,7 +38,7 @@ class BooksControllerTest < ActionController::TestCase
 
     context '(signed out)' do
       setup { sign_out :administrator; @action.call }
-      should redirect_to('the latest published page') { @published }
+      should redirect_to('the latest published page') { [@book, @published] }
     end
   end
 
@@ -79,7 +79,7 @@ class BooksControllerTest < ActionController::TestCase
 
       should assign_to(:book).with_kind_of(Book)
       should redirect_to('the new page form') {
-        new_page_url(:book_id => assigns[:book])
+        new_book_page_url(assigns[:book])
       }
     end
 
