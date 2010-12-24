@@ -9,6 +9,8 @@ class Book < ActiveRecord::Base
     timestamps
   end
 
+  include Publishable
+
   has_many :pages
   validates_presence_of :title
 
@@ -19,10 +21,6 @@ class Book < ActiveRecord::Base
   def style
     title && title.downcase.gsub(/\s+/, '_')
   end
-
-  scope :published, lambda {
-    where('published_at <= ?', Time.zone.now)
-  }
 
   scope :descend_by_published_at, order('published_at DESC')
 end

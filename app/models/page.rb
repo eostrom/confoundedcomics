@@ -9,6 +9,8 @@ class Page < ActiveRecord::Base
     timestamps
   end
 
+  include Publishable
+
   has_attached_file :comic
   validates_attachment_presence :comic
 
@@ -71,7 +73,7 @@ class Page < ActiveRecord::Base
     published.last
   end
 
-  scope :published, lambda {
-    where('published_at <= ?', Time.zone.now)
-  }
+  def published?
+    super && book.published?
+  end
 end
