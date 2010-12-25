@@ -23,8 +23,11 @@
     = yield
 
     - if administrator_signed_in?
-      %ul#admin_nav
-        = content_for :admin_nav
+      #admin_nav
+        %h2 Admin
+        %ul
+          = content_for :admin_nav
+          %li= link_to 'Sign out', destroy_administrator_session_path
 
     %ul#site_nav
       %li.home= link_to 'Home', 'http://confoundedcontraption.com/'

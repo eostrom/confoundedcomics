@@ -13,6 +13,10 @@ Feature: Editing comics
       And I press "Sign in"
      Then I should be on the home page
       And I should see "Signed in"
+      And I should see "Admin"
+     When I follow "Sign out"
+     Then I should be on the home page
+      And I should not see "Admin"
 
   Scenario: Create a book
     Given I am logged in

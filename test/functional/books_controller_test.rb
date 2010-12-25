@@ -8,12 +8,35 @@ class BooksControllerTest < ActionController::TestCase
       @unpublished = Factory.create(:book, :title => 'A New Book',
         :published_at => 2.days.from_now)
 
-      get :index
+      @action = lambda { get :index }
     end
 
     should 'list the published books' do
+      @action.call
+
       assert_select('li a[href=?]', book_path(@published), 'A Book')
       assert_select('li a[href=?]', book_path(@unpublished), false)
+    end
+
+    # test the layout....
+    context '(signed in)' do
+      setup { sign_in Factory.create(:administrator); @action.call }
+
+      should 'have administrator controls' do
+        assert @response.body =~ /admin/i
+        assert_select 'a[href=?]', new_book_path, 'New book'
+        assert_select('a[href=?]',
+          destroy_administrator_session_path, 'Sign out')
+      end
+    end
+
+    context '(signed out)' do
+      setup { sign_out :administrator; @action.call }
+
+      should 'not have administrator controls' do
+        assert !(@response.body =~ /admin/i)
+        assert_select 'a[href=?]', new_book_path, false
+      end
     end
   end
 
