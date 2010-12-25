@@ -27,7 +27,7 @@ module NavigationHelpers
 
       book_page_path(book, page)
 
-    when /the login page/
+    when /the signin page/
       new_administrator_session_path
 
     when /the new page page for "(.*)"/

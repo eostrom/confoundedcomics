@@ -3,11 +3,11 @@ Feature: Editing comics
   A comics author
   wants to upload and edit comics
 
-  Scenario: Log in
+  Scenario: Sign in
     Given the following administrators exist:
         | Email             | Password |
         | admin@example.com | Admin1   |
-     When I go to the login page
+     When I go to the signin page
       And I fill in "Email" with "admin@example.com"
       And I fill in "Password" with "Admin1"
       And I press "Sign in"
@@ -19,7 +19,7 @@ Feature: Editing comics
       And I should not see "Admin"
 
   Scenario: Create a book
-    Given I am logged in
+    Given I am signed in
 
      When I go to the home page
       And I follow "New book"
