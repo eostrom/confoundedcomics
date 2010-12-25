@@ -131,7 +131,6 @@ class PagesControllerTest < ActionController::TestCase
   context 'create' do
     setup do
       @book = Factory.create(:book)
-      @action = lambda { get :new, @params }
 
       sign_in Factory.create(:administrator)
 
@@ -143,14 +142,81 @@ class PagesControllerTest < ActionController::TestCase
       setup { @action.call }
 
       should assign_to(:page).with_kind_of(Page)
+      should 'save the page' do
+        assert_equal 1, Page.count
+      end
       should redirect_to('the page') { [assigns[:page].book, assigns[:page]] }
     end
 
     context 'with invalid params' do
       setup { @params[:page] = {}; @action.call }
 
-      should assign_to(:page).with(nil)
+      should assign_to(:page).with_kind_of(Page)
+      should 'not save the page' do
+        assert_equal 0, Page.count
+      end
       should render_template(:new)
+    end
+  end
+
+  context 'edit' do
+    setup do
+      @page = Factory.create(:page)
+      @params = { :book_id => @page.book.to_param, :id => @page.to_param }
+      @action = lambda { get :edit, @params }
+    end
+
+    context '(signed in)' do
+      setup do
+        sign_in Factory.create(:administrator)
+        @action.call
+      end
+
+      should respond_with(:success)
+      should assign_to(:page).with(@page)
+      should render_template(:edit)
+    end
+  end
+
+  context 'update' do
+    setup do
+      @page = Factory.create(:page)
+
+      sign_in Factory.create(:administrator)
+
+      @params = { :book_id => @page.book.to_param, :id => @page.to_param }
+      @action = lambda { put :update, @params }
+    end
+
+    context 'with valid params' do
+      setup do
+        @params[:page] = { :title => 'New Title' }
+        @action.call
+      end
+
+      should assign_to(:page).with(@page)
+
+      should('update the page') do
+        assert_equal 'New Title', Page.find(@page.id).title
+      end
+
+      # can't use @page here because the URL changed with the title...
+      should redirect_to('the page') { [@page.book, assigns[:page]] }
+    end
+
+    context 'with invalid params' do
+      setup do
+        @params[:page] = { :comic_file_name => nil }
+        @action.call
+      end
+
+      should assign_to(:page).with
+
+      should('not update the page') do
+        assert_equal @page.comic_file_name, Page.find(@page.id).comic_file_name
+      end
+
+      should render_template(:edit)
     end
   end
 
@@ -173,25 +239,6 @@ class PagesControllerTest < ActionController::TestCase
           :id => @page.to_param
         },
         '/books/book-1/pages/2010-08-08-page-1')
-    end
-  end
-
-  context 'edit' do
-    setup do
-      @page = Factory.create(:page)
-      @params = { :book_id => @page.book.to_param, :id => @page.to_param }
-      @action = lambda { get :edit, @params }
-    end
-
-    context '(signed in)' do
-      setup do
-        sign_in Factory.create(:administrator)
-        @action.call
-      end
-
-      should respond_with(:success)
-      should assign_to(:page).with(@page)
-      should render_template(:edit)
     end
   end
 end

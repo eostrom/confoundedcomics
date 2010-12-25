@@ -51,4 +51,15 @@ class PagesController < ApplicationController
     @book = Book.find(params[:book_id])
     @page = Page.find(params[:id], :scope => @book)
   end
+
+  def update
+    @book = Book.find(params[:book_id])
+    @page = Page.find(params[:id], :scope => @book)
+
+    if @page.update_attributes(params[:page])
+      redirect_to [@book, @page]
+    else
+      render :action => 'edit'
+    end
+  end
 end

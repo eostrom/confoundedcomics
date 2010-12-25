@@ -1,3 +1,3 @@
-Then /^the page should be unpublished$/ do
-  assert page.has_css?('.unpublished.content')
+Then /^the page should be ([^ ]+)$/ do |state|
+  assert page.has_css?(".#{state}.content")
 end

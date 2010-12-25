@@ -48,8 +48,8 @@ Comics::Application.routes.draw do
   #     resources :products
   #   end
 
-  resources :books, :only => [:index, :show, :new, :create] do
-    resources :pages, :only => [:index, :show, :new, :create, :edit]
+  resources :books, :only => [:index, :show, :new, :create] do # TODO: edit
+    resources :pages, :only => [:index, :show, :new, :create, :edit, :update]
   end
   root :to => "books#index"
 

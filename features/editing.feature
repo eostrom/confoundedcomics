@@ -21,6 +21,7 @@ Feature: Editing comics
       And I follow "New book"
       And I fill in "Title" with "Book 1"
       And I fill in "Description" with "The first book."
+      And I fill in "Publish date" with "2010-08-01"
       And I attach the file "features/pictures/banner.jpg" to "Banner"
       And I press "Save"
      Then I should be on the new page page for "Book 1"
@@ -33,7 +34,8 @@ Feature: Editing comics
       And the page should be unpublished
 
      When I follow "Edit"
-      And I fill in "Publish date" with "today"
+        # TODO: natural date parsing
+      And I fill in "Publish date" with "2010-08-01"
       And I press "Save"
      Then I should be on the page "Page 1"
       And the page should be published
