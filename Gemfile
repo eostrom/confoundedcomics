@@ -44,6 +44,7 @@ group :test do
   gem 'shoulda', '~> 2.11.3'
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
+  gem 'rr', '~> 1.0.2'
 end
 
 group :cucumber do
