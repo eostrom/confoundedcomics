@@ -38,4 +38,8 @@ module PagesHelper
       yield form
     end
   end
+
+  def published_state(page)
+    page.published? ? :published : :unpublished
+  end
 end

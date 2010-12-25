@@ -1,24 +1,24 @@
--# - admin_unless(@page.published? && @book.published?, :content) do
-#banner
-  = banner_link(@book)
+%div{:class => "content #{published_state(@page)}"}
+  #banner
+    = banner_link(@book)
 
-#comic
-  = image_tag(@page.comic.url, :alt => h(@page.title))
+  #comic
+    = image_tag(@page.comic.url, :alt => h(@page.title))
 
--# TODO: make these look right on IE 7
-%ul#page_nav
-  %li>= first_page_link(@page)
-  %li>= previous_page_link(@page)
-  %li>= next_page_link(@page)
-  %li>= last_page_link(@page)
+  -# TODO: make these look right on IE 7
+  %ul#page_nav
+    %li>= first_page_link(@page)
+    %li>= previous_page_link(@page)
+    %li>= next_page_link(@page)
+    %li>= last_page_link(@page)
 
-#archive
-  %h2= link_to 'Archive', '#pages'
-  %ol#pages
-    - @book.pages.each do |page|
-      %li= link_to_unless page == @page, h(page.title), [@book, page]
+  #archive
+    %h2= link_to 'Archive', '#pages'
+    %ol#pages
+      - @book.pages.each do |page|
+        %li= link_to_unless page == @page, h(page.title), [@book, page]
 
-#news
-  %p.date= @page.published_at
-  - if @page.commentary.present?
-    = simple_format(@page.commentary)
+  #news
+    %p.date= @page.published_at
+    - if @page.commentary.present?
+      = simple_format(@page.commentary)
