@@ -31,4 +31,11 @@ module PagesHelper
   def last_page_link(page)
     maybe_link 'Last', [page.book, page.last_successor]
   end
+
+  def page_form_for(page)
+    semantic_form_for([page.book, page],
+      :html => {:class => 'admin', :multipart => true}) do |form|
+      yield form
+    end
+  end
 end

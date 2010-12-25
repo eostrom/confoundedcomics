@@ -1,4 +1,4 @@
-= semantic_form_for [@book, @page], :html => {:class => 'admin', :multipart => true} do |form|
+= page_form_for(@page) do |form|
   = form.input :title
   = form.input :commentary
   = form.input :published_at, :label => 'Publish date'
