@@ -98,11 +98,16 @@ class PageTest < ActiveSupport::TestCase
 
     context 'with no title' do
       setup do
+        # Test that page numbers are scoped within a book.
+        Factory.create(:page,
+          :published_at => '2010-08-08', :title => nil,
+          :book => Factory.create(:book, :title => 'Another Book'))
+
         @page.update_attributes(:title => nil)
       end
 
-      should 'have a date permalink' do
-        assert_equal '2010-08-08', @page.to_param
+      should 'have a page number permalink' do
+        assert_equal '2010-08-08-page-1', @page.to_param
       end
     end
   end

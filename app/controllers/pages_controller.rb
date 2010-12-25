@@ -13,7 +13,10 @@ class PagesController < ApplicationController
 
   def show
     @book = Book.visible_to(current_administrator).find(params[:book_id])
-    @page = @book.pages.visible_to(current_administrator).find(params[:id])
+    # For friendly_id to work, we need to use Page and :scope, rather
+    # than @book.pages.
+    @page = Page.visible_to(current_administrator).
+      find(params[:id], :scope => @book)
 
     render :action => 'show'
   rescue ActiveRecord::RecordNotFound

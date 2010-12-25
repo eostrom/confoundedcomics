@@ -19,19 +19,24 @@ class Page < ActiveRecord::Base
 
   default_scope :order => 'published_at ASC'
 
-  has_friendly_id :date_title, :use_slug => true
+  has_friendly_id :date_title, :scope => :book, :use_slug => true
   def date_title
     [
-      published_at || id || 'page',
-      (FriendlyId::SlugString.new(title).normalize! if title.present?)
+      published_at,
+      (title.present? ?
+        FriendlyId::SlugString.new(title).normalize! :
+        "page-#{number}")
     ].compact.join('-')
   end
   def normalize_friendly_id(text); text; end
 
+  def number
+    book.pages.before(self).count + 1
+  end
+
   def to_s
     title.presence || '[untitled]'
   end
-  def self.name_attribute; :to_s; end
 
   def published_at=(time)
     self[:published_at] = time && time.to_date
