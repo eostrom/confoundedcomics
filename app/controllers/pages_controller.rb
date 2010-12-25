@@ -63,4 +63,16 @@ class PagesController < ApplicationController
       render :action => 'edit'
     end
   end
+
+  def destroy
+    @book = Book.find(params[:book_id])
+    @page = Page.find(params[:id], :scope => @book)
+
+    if @page.destroy
+      redirect_to @book
+    else
+      flash[:error] = "Can't delete #{page.admin_label}"
+      render :action => 'show'
+    end
+  end
 end

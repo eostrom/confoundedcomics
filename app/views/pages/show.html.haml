@@ -26,4 +26,5 @@
 
 - content_for :admin_nav do
   %li= link_to 'Edit', edit_book_page_path(@book, @page)
+  %li= delete_page_link(@page)
   %li= link_to 'New page', new_book_page_path(@book)

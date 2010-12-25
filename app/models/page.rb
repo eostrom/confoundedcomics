@@ -38,6 +38,13 @@ class Page < ActiveRecord::Base
     title.presence || '[untitled]'
   end
 
+  def admin_label
+    label = title.presence ||
+      (number && "page #{number}") ||
+      "this page"
+    label += " (#{published_at})" if published_at
+  end
+
   def published_at=(time)
     self[:published_at] = time && time.to_date
   end

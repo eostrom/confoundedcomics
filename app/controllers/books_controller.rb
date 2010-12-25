@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_filter :authenticate_administrator!, :except => [:index, :show]
 
   def index
-    @books = Book.published.descend_by_published_at
+    @books = Book.visible_to(current_administrator).descend_by_published_at
   end
 
   def show

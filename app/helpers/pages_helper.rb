@@ -34,4 +34,9 @@ module PagesHelper
   def published_state(page)
     page.published? ? :published : :unpublished
   end
+
+  def delete_page_link(page)
+    link_to('Delete page', [page.book, page], :method => :delete,
+      :confirm => "Are you sure you want to delete #{page.admin_label}?")
+  end
 end

@@ -267,6 +267,19 @@ class PagesControllerTest < ActionController::TestCase
     end
   end
 
+  context 'delete' do
+    setup do
+      @page = Factory.create(:page)
+
+      sign_in Factory.create(:administrator)
+
+      delete :destroy, :book_id => @page.book.to_param, :id => @page.to_param
+    end
+
+    should('destroy the page') { assert !Page.find_by_id(@page) }
+    should redirect_to('the book') { book_path(@page.book) }
+  end
+
   context 'page_path' do
     setup do
       @book = Factory.create(:book, :title => 'Book 1')

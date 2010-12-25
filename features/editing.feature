@@ -62,4 +62,16 @@ Feature: Editing comics
      When I follow "Page 2" within ".unpublished"
      Then I should be on the page "Page 2"
 
-# TODO: delete a page
+  Scenario: Delete a page
+    Given the following pages exist:
+        | Title  | Book          |
+        | Page 1 | Title: Book 1 |
+        | Page 2 | Title: Book 1 |
+        | Page 3 | Title: Book 1 |
+      And I am signed in
+
+     When I follow "Book 1"
+      And I follow "Page 2"
+      And I follow "Delete page"
+     Then I should be on the page "Page 1"
+      And I should not see "Page 2"
