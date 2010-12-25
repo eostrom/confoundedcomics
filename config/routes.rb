@@ -49,7 +49,7 @@ Comics::Application.routes.draw do
   #   end
 
   resources :books, :only => [:index, :show, :new, :create] do
-    resources :pages, :only => [:index, :show, :new, :create]
+    resources :pages, :only => [:index, :show, :new, :create, :edit]
   end
   root :to => "books#index"
 

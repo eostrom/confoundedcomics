@@ -33,7 +33,8 @@ Feature: Editing comics
       And the page should be unpublished
 
      When I follow "Edit"
-      And I update the published date to today
+      And I fill in "Publish date" with "today"
+      And I press "Save"
      Then I should be on the page "Page 1"
       And the page should be published
 

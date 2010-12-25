@@ -46,4 +46,9 @@ class PagesController < ApplicationController
       render :action => 'new'
     end
   end
+
+  def edit
+    @book = Book.find(params[:book_id])
+    @page = Page.find(params[:id], :scope => @book)
+  end
 end

@@ -1,0 +1,7 @@
+= page_form_for(@page) do |form|
+  = form.input :title
+  = form.input :commentary
+  = form.input :published_at, :label => 'Publish date', :as => :string
+  = form.input :comic
+  = form.buttons do
+    = form.commit_button

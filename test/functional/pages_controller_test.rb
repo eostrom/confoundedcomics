@@ -175,4 +175,23 @@ class PagesControllerTest < ActionController::TestCase
         '/books/book-1/pages/2010-08-08-page-1')
     end
   end
+
+  context 'edit' do
+    setup do
+      @page = Factory.create(:page)
+      @params = { :book_id => @page.book.to_param, :id => @page.to_param }
+      @action = lambda { get :edit, @params }
+    end
+
+    context '(signed in)' do
+      setup do
+        sign_in Factory.create(:administrator)
+        @action.call
+      end
+
+      should respond_with(:success)
+      should assign_to(:page).with(@page)
+      should render_template(:edit)
+    end
+  end
 end

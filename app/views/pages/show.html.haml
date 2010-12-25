@@ -22,3 +22,6 @@
     %p.date= @page.published_at
     - if @page.commentary.present?
       = simple_format(@page.commentary)
+
+- content_for :admin_nav do
+  %li= link_to 'Edit', edit_book_page_path(@book, @page)
