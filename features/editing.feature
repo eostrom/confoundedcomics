@@ -41,9 +41,15 @@ Feature: Editing comics
       And the page should be published
 
      When I follow "New page"
-      And I fill in the page form for "Page 2"
-      And I press "Save and add another"
-     Then I should be on the new page page
+      And I fill in the following:
+        | Title        | Page 2                      |
+        | Comic        | features/pictures/comic.jpg |
+        | Publish date | 2037-01-01                  |
+      And I press "Save"
+
+# TODO:
+#      And I press "Save and add another"
+#     Then I should be on the new page page
 
      When I follow "Page 1"
      Then I should see "Next" within ".unpublished"
@@ -51,3 +57,5 @@ Feature: Editing comics
 
      When I follow "Page 2" within ".unpublished"
      Then I should be on the page "Page 2"
+
+# TODO: delete a page

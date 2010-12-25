@@ -13,6 +13,7 @@ class PagesController < ApplicationController
 
   def show
     @book = Book.visible_to(current_administrator).find(params[:book_id])
+    @pages = @book.pages.visible_to(current_administrator)
     # For friendly_id to work, we need to use Page and :scope, rather
     # than @book.pages.
     @page = Page.visible_to(current_administrator).
@@ -20,10 +21,10 @@ class PagesController < ApplicationController
 
     render :action => 'show'
   rescue ActiveRecord::RecordNotFound
-    if @book && @book.pages.visible_to(current_administrator).present?
+    if @book && @pages.present?
       flash[:warning] =
         "Can't find the page you're looking for, but here's the latest!"
-      redirect_to [@book, @book.pages.visible_to(current_administrator).latest]
+      redirect_to [@book, @pages.latest]
     else
       flash[:warning] =
         "Can't find the page you're looking for. Try these books instead!"

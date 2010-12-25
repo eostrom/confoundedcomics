@@ -2,7 +2,7 @@ module PagesHelper
   def banner_link(book)
     if book.banner?
       link_to(image_tag(book.banner.url, :alt => book.title),
-        [book, book.pages.latest])
+        [book, book.pages.visible_to(current_administrator).latest])
     end
   end
 
@@ -16,20 +16,12 @@ module PagesHelper
     end
   end
 
-  def first_page_link(page)
-    maybe_link 'First', [page.book, page.first_predecessor]
-  end
+  def nav_list_item(label, direction)
+    page = @page.send(direction, @pages)
 
-  def previous_page_link(page)
-    maybe_link 'Previous', [page.book, page.previous]
-  end
-
-  def next_page_link(page)
-    maybe_link 'Next', [page.book, page.next]
-  end
-
-  def last_page_link(page)
-    maybe_link 'Last', [page.book, page.last_successor]
+    content_tag('li',
+      maybe_link(label, [@book, page]),
+      :class => page && published_state(page))
   end
 
   def page_form_for(page)

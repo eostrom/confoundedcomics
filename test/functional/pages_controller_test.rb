@@ -48,9 +48,9 @@ class PagesControllerTest < ActionController::TestCase
 
     context 'given multiple pages' do
       setup do
-        @first = Factory.create(:page,
+        @first = Factory.create(:page, :title => 'Page 1',
           :published_at => 3.days.ago, :book => @book)
-        @last = Factory.create(:page,
+        @last = Factory.create(:page, :title => 'Page 3',
           :published_at => 1.day.ago, :book => @book)
         @action.call
       end
@@ -60,6 +60,53 @@ class PagesControllerTest < ActionController::TestCase
         assert_select 'a[href=?]', book_page_path(@book, @first), 'Previous'
         assert_select 'a[href=?]', book_page_path(@book, @last), 'Next'
         assert_select 'a[href=?]', book_page_path(@book, @last), 'Last'
+        assert_select 'a[href=?]', book_page_path(@book, @first), 'Page 1'
+        assert_select 'a[href=?]', book_page_path(@book, @last), 'Page 3'
+      end
+
+      context '(some unpublished)' do
+        setup { @last.update_attributes(:published_at => 1.day.from_now) }
+
+        context '(signed in)' do
+          setup { sign_in Factory.create(:administrator); @action.call }
+
+          should 'link to unpublished pages' do
+            assert_select('#banner a[href=?]', book_page_path(@book, @last))
+            assert_select 'li.published a', 'First'
+            assert_select 'li.published a', 'Previous'
+            assert_select 'li.unpublished a', 'Next'
+            assert_select 'li.unpublished a', 'Last'
+            assert_select 'li.published a', 'Page 1'
+            assert_select 'li.unpublished a', 'Page 3'
+          end
+        end
+
+        context '(signed out)' do
+          setup { sign_out :administrator; @action.call }
+
+          should 'not link to unpublished pages' do
+            assert_select('#banner a[href=?]', book_page_path(@book, @page))
+            assert_select 'a[href=?]', book_page_path(@book, @last), false
+          end
+        end
+      end
+    end
+
+    context '(signed in)' do
+      setup { sign_in Factory.create(:administrator) }
+
+      should 'show a new page link' do
+        @action.call
+        assert_select 'a[href=?]', new_book_page_path(@book), 'New page'
+      end
+    end
+
+    context '(signed out)' do
+      setup { sign_out :administrator }
+
+      should 'not show a new page link' do
+        @action.call
+        assert_select 'a[href=?]', new_book_page_path(@book), false
       end
     end
 

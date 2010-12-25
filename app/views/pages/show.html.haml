@@ -7,16 +7,17 @@
 
   -# TODO: make these look right on IE 7
   %ul#page_nav
-    %li>= first_page_link(@page)
-    %li>= previous_page_link(@page)
-    %li>= next_page_link(@page)
-    %li>= last_page_link(@page)
+    = nav_list_item('First', :first_predecessor)
+    = nav_list_item('Previous', :previous)
+    = nav_list_item('Next', :next)
+    = nav_list_item('Last', :last_successor)
 
   #archive
     %h2= link_to 'Archive', '#pages'
     %ol#pages
-      - @book.pages.each do |page|
-        %li= link_to_unless page == @page, h(page.title), [@book, page]
+      - @pages.each do |page|
+        %li{:class => published_state(page)}
+          = link_to_unless page == @page, h(page.title), [@book, page]
 
   #news
     %p.date= @page.published_at
@@ -25,3 +26,4 @@
 
 - content_for :admin_nav do
   %li= link_to 'Edit', edit_book_page_path(@book, @page)
+  %li= link_to 'New page', new_book_page_path(@book)

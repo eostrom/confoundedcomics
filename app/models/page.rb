@@ -52,25 +52,22 @@ class Page < ActiveRecord::Base
     where('published_at > ?', start)
   }
 
-  def first_predecessor
-    book.pages.published.before(self).find(:first, :order => 'published_at ASC')
+  def first_predecessor(scope = book.pages.published)
+    scope.before(self).first
   end
 
-  def previous
+  def previous(scope = book.pages.published)
     return nil if !published_at
 
-    book.pages.published.before(self).last
+    scope.before(self).last
   end
 
-  def next
-    return nil if !published_at || published_at.beginning_of_day > Time.zone.now
-
-    book.pages.published.after(self).
-      find(:first, :order => 'published_at ASC')
+  def next(scope = book.pages.published)
+    scope.after(self).first
   end
 
-  def last_successor
-    book.pages.published.after(self).last
+  def last_successor(scope = book.pages.published)
+    scope.after(self).last
   end
 
   def self.latest
