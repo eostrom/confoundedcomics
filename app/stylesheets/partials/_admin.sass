@@ -1,0 +1,51 @@
+!admin_bg = #cc88bb
+!admin_fg = white
+!admin_form_fg = #901172
+
+.admin
+  background= !admin_bg
+  color= !admin_fg
+  a:link, a:visited, a:active
+    color: white
+    text-decoration: none
+  a:hover
+    text-decoration: underline
+  font-family: "Helvetica", "Arial", sans-serif
+  padding: 1em
+  -moz-border-radius: 1em
+  h2
+    margin: 0
+    font-size: 100%
+  ul
+    list-style-type: none
+    padding: 0
+    margin: 1em 0 0
+    li.general
+      margin-top: 1em
+
+form.admin
+  text-align: left
+  .required
+    font-weight: bold
+  label
+    display: block
+  input, textarea
+    margin-bottom: 1em
+    border: none
+    padding: 0.3em 0.2em 0.2em
+    color= !admin_form_fg
+    font-weight: bold
+    width: 96%
+
+#admin_nav
+  position: fixed
+  right: 20px
+  top: 20px
+  text-align: right
+
+div#nyroModalWrapper
+  border: none
+  background= !admin_bg
+  -moz-border-radius: 1em
+  font-size: inherit
+  padding: 1em

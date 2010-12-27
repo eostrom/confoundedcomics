@@ -25,6 +25,7 @@
       = simple_format(@page.commentary)
 
 - content_for :admin_nav do
-  %li= link_to 'Edit', edit_book_page_path(@book, @page)
+  %li= link_to 'Edit page', edit_book_page_path(@book, @page), :class => 'modal', :rev => 'modal'
   %li= delete_page_link(@page)
   %li= link_to 'New page', new_book_page_path(@book)
+  -# , :class => 'modal', :rev => 'modal'
