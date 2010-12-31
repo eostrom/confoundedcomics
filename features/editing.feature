@@ -47,8 +47,8 @@ Feature: Editing comics
      When I follow "New page"
       And I fill in the following:
         | Title        | Page 2                      |
-        | Comic        | features/pictures/comic.jpg |
         | Publish date | 2037-01-01                  |
+      And I attach the file "features/pictures/comic.jpg" to "Comic"
       And I press "Save"
 
 # TODO:
@@ -56,10 +56,11 @@ Feature: Editing comics
 #     Then I should be on the new page page
 
      When I follow "Page 1"
-     Then I should see "Next" within ".unpublished"
-      And I should see "Last" within ".unpublished"
+     Then the "Next" link should be unpublished
+      And the "Last" link should be unpublished
+      And the "Page 2" link should be unpublished
 
-     When I follow "Page 2" within ".unpublished"
+     When I follow "Page 2"
      Then I should be on the page "Page 2"
 
   Scenario: Delete a page

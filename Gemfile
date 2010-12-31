@@ -51,8 +51,11 @@ end
 
 group :cucumber do
   gem 'cucumber-rails', '~> 0.3.2'
-  gem 'database_cleaner', '~> 0.5.2'
-  gem 'capybara', '~> 0.3.9'
+  gem 'database_cleaner', '~> 0.6.0'
+  gem 'capybara', '~> 0.4.0'
+  # gem 'capybara-envjs', '~> 0.4.0'
+  # gem 'capybara-envjs-fixes', :git => 'git://github.com/rajatvig/capybara-envjs-fixes.git'
+  # gem 'akephalos', :git => 'git://github.com/thoughtbot/akephalos.git'
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
 end
