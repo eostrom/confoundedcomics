@@ -23,19 +23,36 @@
     li.general
       margin-top: 1em
 
-form.admin
+form.formtastic.admin
   text-align: left
   .required
     font-weight: bold
-  label
-    display: block
-  input, textarea
+  fieldset > ol > li
+    margin: 0
+    padding: 0
+    overflow: visible
+    label
+      display: block
+    input, textarea
+      border: none
+      padding: 0.3em 0.2em 0.2em
+      color= !admin_form_fg
+      font-weight: bold
+      width: 396px
+      &[type=submit]
+        margin-bottom: 0
+        width: auto
+  fieldset.inputs > ol > li
     margin-bottom: 1em
-    border: none
-    padding: 0.3em 0.2em 0.2em
-    color= !admin_form_fg
-    font-weight: bold
-    width: 96%
+  fieldset.buttons li.commit
+    float: right
+
+  width: 400px
+  margin: auto
+  padding: 1em
+  #nyroModalContent &
+    padding: 0
+    margin-bottom: -2em
 
 #admin_nav
   position: fixed
