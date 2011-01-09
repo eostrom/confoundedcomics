@@ -14,6 +14,14 @@ When /^I wait for the popup$/ do
   end
 end
 
+When /^I wait for the popup to close$/ do
+  begin
+    wait_until { !page.find('#nyroModalContent').try(:visible?) }
+  rescue Capybara::ElementNotFound
+    # See above.
+  end
+end
+
 Then /^the page should be ([^ ]+)$/ do |state|
   assert page.has_css?(".#{state}.content")
 end

@@ -210,6 +210,8 @@ class PagesControllerTest < ActionController::TestCase
     setup do
       @page = Factory.create(:page)
       @params = { :book_id => @page.book.to_param, :id => @page.to_param }
+      @referer =
+        @request.env['HTTP_REFERER'] = book_page_path(@page.book, @page)
       @action = lambda { get :edit, @params }
     end
 
@@ -222,6 +224,10 @@ class PagesControllerTest < ActionController::TestCase
       should respond_with(:success)
       should assign_to(:page).with(@page)
       should render_template(:edit)
+
+      should 'have a cancel link' do
+        assert_select 'a[href=?]', @referer, 'Cancel'
+      end
     end
   end
 

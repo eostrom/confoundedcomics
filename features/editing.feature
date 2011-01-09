@@ -47,6 +47,13 @@ Feature: Editing comics
       And the page should be published
 
      When I follow "New page"
+      And I wait for the popup
+      And I follow "Cancel"
+      And I wait for the popup to close
+     Then I should be on the page "Page 1"
+
+     When I follow "New page"
+      And I wait for the popup
       And I fill in the following:
         | Title        | Page 2                      |
         | Publish date | 2037-01-01                  |
