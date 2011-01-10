@@ -18,7 +18,6 @@ Feature: Editing comics
      Then I should be on the home page
       And I should not see "Admin"
 
-  @javascript
   Scenario: Create a book
     Given I am signed in
 
@@ -40,20 +39,16 @@ Feature: Editing comics
 
      When I follow "Edit page"
         # TODO: natural date parsing
-      And I wait for the popup
       And I fill in "Publish date" with "2010-08-01"
       And I press "Save"
      Then I should be on the page "Page 1"
       And the page should be published
 
      When I follow "New page"
-      And I wait for the popup
       And I follow "Cancel"
-      And I wait for the popup to close
      Then I should be on the page "Page 1"
 
      When I follow "New page"
-      And I wait for the popup
       And I fill in the following:
         | Title        | Page 2                      |
         | Publish date | 2037-01-01                  |
@@ -64,12 +59,10 @@ Feature: Editing comics
 #      And I press "Save and add another"
 #     Then I should be on the new page page
 
-     When I follow "Archive"
       And I follow "Page 1"
      Then the "Next" link should be unpublished
       And the "Last" link should be unpublished
 
-     When I follow "Archive"
      Then the "Page 2" link should be unpublished
 
      When I follow "Page 2"
@@ -88,3 +81,52 @@ Feature: Editing comics
       And I follow "Delete page"
      Then I should be on the page "Page 1"
       And I should not see "Page 2"
+
+  @javascript
+  Scenario: Add a page
+    Given the following pages exist:
+        | Title  | Book          |
+        | Page 1 | Title: Book 1 |
+      And I am signed in
+      And I am on the page "Page 1"
+
+     When I follow "New page"
+      And I wait for the popup
+      And I attach the local file "pictures/comic.jpg" to "Comic"
+      And I press "Save"
+     Then I should be on an untitled page of "Book 1"
+
+  @javascript
+  Scenario: Cancel adding a page
+    Given the following pages exist:
+        | Title  |
+        | Page 1 |
+        | Page 2 |
+      And I am signed in
+      And I am on the page "Page 1"
+
+     When I follow "New page"
+      And I wait for the popup
+      And I follow "Cancel"
+     Then I should be on the page "Page 1"
+      And I should not see "Publish date"
+
+  @javascript
+  Scenario: Edit a page
+    Given the following books exist:
+        | Title  | Published At |
+        | Book 1 | 2010-07-31   |
+    Given the following pages exist:
+        | Title  | Book          |
+        | Page 1 | Title: Book 1 |
+        | Page 2 | Title: Book 1 |
+      And I am signed in
+      And I am on the page "Page 1"
+
+     When I follow "Edit page"
+      And I wait for the popup
+      And I fill in "Title" with "Page the First"
+      And I fill in "Publish date" with "2010-08-01"
+      And I press "Save"
+     Then I should be on the page "Page the First"
+      And the page should be published

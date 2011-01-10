@@ -17,15 +17,9 @@ module NavigationHelpers
       page = find_for_path(Page, :title => $1)
       book_page_path(page.book, page)
     when /(page )?"(.*)" (of|from) "(.*)"/
-      book = find_for_path(Book, :title => $4)
-      page = find_for_path(book.pages, :title => $2)
-      if !page
-        page = Page.find_by_title($2)
-        fail %{Page "#{$2}" not found in book "#{$4}"} +
-          (%{ (found in book "#{page.book.title}")} if page)
-      end
-
-      book_page_path(book, page)
+      path_to_book_page($4, $2)
+    when /an untitled page of "(.*)"/
+      path_to_book_page($1, '')
 
     when /the signin page/
       new_administrator_session_path
@@ -43,6 +37,18 @@ module NavigationHelpers
           "Now, go and add a mapping in #{__FILE__}"
       end
     end
+  end
+
+  def path_to_book_page(book, page)
+    book = find_for_path(Book, :title => book)
+    page = find_for_path(book.pages, :title => page)
+    if !page
+      page = Page.find_by_title(page)
+      fail %{Page "#{page}" not found in book "#{book}"} +
+        (%{ (found in book "#{page.book.title}")} if page)
+    end
+
+    book_page_path(book, page)
   end
 
   def find_for_path(scope, conditions)
