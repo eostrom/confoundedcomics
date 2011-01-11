@@ -39,6 +39,7 @@ gem 'paperclip', '~> 2.3.8'
 gem 'haml', '~> 3.0.16'
 gem 'friendly_id', '~> 3.1.7'
 gem 'formtastic', '~> 1.2.2'
+gem 'chronic', '~> 0.3.0'
 
 # TODO: extract gems shared by test and cucumber
 
@@ -47,6 +48,7 @@ group :test do
   gem 'factory_girl_rails', '~> 1.0'
   gem 'faker', '~> 0.3.1'
   gem 'rr', '~> 1.0.2'
+  gem 'timecop', '~> 0.3.5'
 end
 
 group :cucumber do

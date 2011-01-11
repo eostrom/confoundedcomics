@@ -45,10 +45,6 @@ class Page < ActiveRecord::Base
     label += " (#{published_at})" if published_at
   end
 
-  def published_at=(time)
-    self[:published_at] = time && time.to_date
-  end
-
   scope :before, lambda { |finish|
     finish = finish.published_at if Page === finish
     where('published_at < ?', finish)

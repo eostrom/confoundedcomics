@@ -38,8 +38,7 @@ Feature: Editing comics
       And the page should be unpublished
 
      When I follow "Edit page"
-        # TODO: natural date parsing
-      And I fill in "Publish date" with "2010-08-01"
+      And I fill in "Publish date" with "today"
       And I press "Save"
      Then I should be on the page "Page 1"
       And the page should be published

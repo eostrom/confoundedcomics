@@ -25,6 +25,17 @@ class BookTest < ActiveSupport::TestCase
     end
   end
 
+  context 'A Book' do
+    setup { @book = Factory.build(:book) }
+
+    should 'accept natural-language publish dates' do
+      Timecop.freeze do
+        @book.published_at = 'today'
+        assert_equal Date.today, @book.published_at
+      end
+    end
+  end
+
   context 'An untitled Book' do
     setup { @book = Factory.build(:book, :title => nil) }
 

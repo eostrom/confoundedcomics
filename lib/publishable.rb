@@ -5,6 +5,10 @@ module Publishable
 
   def visible_to(user); user || published?; end
 
+  def published_at=(value)
+    super(value.blank? ? nil : (String === value ? Chronic.parse(value) : value).to_date)
+  end
+
   def self.included(mod)
     mod.class_eval do
       scope :published, lambda {
