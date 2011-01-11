@@ -54,7 +54,7 @@ class BookTest < ActiveSupport::TestCase
     end
   end
 
-  context 'An published Book' do
+  context 'An unpublished Book' do
     setup { @book = Factory.create(:book, :published_at => 1.day.from_now) }
 
     should 'be visible only to administrators' do
