@@ -96,6 +96,24 @@ Feature: Editing comics
      Then I should be on an untitled page of "Book 1"
 
   @javascript
+  Scenario: Set a publish date using a date picker
+    Given a published book exists with a title of "Book 1"
+      And the following pages exist:
+        | Title  | Book          |
+        | Page 1 | Title: Book 1 |
+      And I am signed in
+      And I am on the page "Page 1"
+
+     When I follow "New page"
+      And I wait for the popup
+      And I attach the local file "pictures/comic.jpg" to "Comic"
+      And I open the calendar for "Publish date" and click "1"
+      And I press "Save"
+     Then I should be on an untitled page of "Book 1"
+        # The first of the current month is never in the future, so...
+      And the page should be published
+
+  @javascript
   Scenario: Cancel adding a page
     Given the following pages exist:
         | Title  |
@@ -112,10 +130,8 @@ Feature: Editing comics
 
   @javascript
   Scenario: Edit a page
-    Given the following books exist:
-        | Title  | Published At |
-        | Book 1 | 2010-07-31   |
-    Given the following pages exist:
+    Given a published book exists with a title of "Book 1"
+      And the following pages exist:
         | Title  | Book          |
         | Page 1 | Title: Book 1 |
         | Page 2 | Title: Book 1 |
