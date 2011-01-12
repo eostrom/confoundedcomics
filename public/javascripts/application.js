@@ -4,7 +4,7 @@ jQuery(function($) {
     closeButton: '',
 
     endFillContent: function(modal, settings) {
-      modal.wrapper.find('input.date')
+      modal.wrapper.find('.formtastic li.date input')
         .datepicker({
           constrainInput: false,
           showOn: 'button',
