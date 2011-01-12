@@ -8,10 +8,10 @@
     %title #{@book ? h(@book.title) : 'Comix'} - Confounded Contraption
     - if @book && !@book.new_record?
       = auto_discovery_link_tag(:atom, book_pages_path(@book))
-    = stylesheet_link_tag 'formtastic', 'nyroModal/styles/nyroModal', 'comics'
+    = stylesheet_link_tag 'jquery/custom-theme/jquery-ui.custom.css', 'formtastic', 'nyroModal/styles/nyroModal', 'comics'
     - if @book
       = stylesheet_link_tag("books/#{@book.style}.css")
-    = javascript_include_tag 'jquery/jquery', 'rails', 'nyroModal/jquery.nyroModal-1.6.2.js', 'application'
+    = javascript_include_tag 'jquery/jquery', 'jquery/jquery-ui.min.js', 'rails', 'nyroModal/jquery.nyroModal-1.6.2.js', 'application'
     = csrf_meta_tag
     /[if lt IE 9]
       %script(src="http://ie7-js.googlecode.com/svn/version/2.1(beta4)/IE9.js")
