@@ -21,6 +21,4 @@ class Book < ActiveRecord::Base
   def style
     title && title.downcase.gsub(/\s+/, '_')
   end
-
-  scope :descend_by_published_at, order('published_at DESC')
 end

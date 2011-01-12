@@ -35,6 +35,8 @@ module Publishable
           where({}) :
           published)
       }
+
+      scope :descend_by_published_at, order('published_at DESC')
     end
   end
 end

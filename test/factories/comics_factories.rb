@@ -1,3 +1,10 @@
+class PublishableTestable < ActiveRecord::Base
+  set_table_name 'pages'
+  include Publishable
+end
+
+Factory.define(:publishable, :class => PublishableTestable) { |publishable| }
+
 Factory.define(:book) do |book|
   book.title 'A Book'
 end
