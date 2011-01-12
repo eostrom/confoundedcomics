@@ -30,7 +30,7 @@ class BookTest < ActiveSupport::TestCase
 
     should 'accept natural-language publish dates' do
       Timecop.freeze do
-        @book.published_at = 'today'
+        @book.published_at_string = 'today'
         assert_equal Date.today, @book.published_at
       end
     end

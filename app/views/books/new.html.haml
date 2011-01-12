@@ -1,7 +1,7 @@
 = semantic_form_for @book, :html => {:class => 'admin', :multipart => true} do |form|
   = form.input :title
   = form.input :description
-  = form.input :published_at, :label => 'Publish date', :as => :date
+  = form.input :published_at_string, :label => 'Publish date', :as => :date
   = form.input :banner
   = form.buttons do
     = form.commit_button

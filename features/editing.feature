@@ -145,3 +145,19 @@ Feature: Editing comics
       And I press "Save"
      Then I should be on the page "Page the First"
       And the page should be published
+
+  @javascript
+  Scenario: Error handling
+    Given a published book exists with a title of "Book 1"
+      And the following pages exist:
+        | Title  | Book          |
+        | Page 1 | Title: Book 1 |
+      And I am signed in
+      And I am on the page "Page 1"
+
+     When I follow "Edit page"
+      And I wait for the popup
+      And I fill in "Publish date" with "asiuahe99"
+      And I press "Save"
+     Then I should be on the page "Page 1"
+      And I should see "must be a date"
