@@ -22,7 +22,7 @@ module Publishable
     mod.class_eval do
       validate :published_at_string_must_be_parsable
       def published_at_string_must_be_parsable
-        errors.add(:published_at_string, "must be a date") if
+        errors.add(:published_at_string, "must be a date.") if
           published_at_string.present? && published_at.blank?
       end
 
