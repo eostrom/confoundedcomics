@@ -21,6 +21,16 @@ class PagesControllerTest < ActionController::TestCase
           @page.published_at.to_time(:local).to_datetime.to_s)
       end
     end
+
+    context 'given unpublished pages' do
+      setup { @unpublished = Factory.create(:page, :book => @book) }
+
+      should 'not list them' do
+        @params[:format] = 'atom'
+        @action.call
+        assert !assigns[:pages].include?(@unpublished)
+      end
+    end
   end
 
   context 'show' do
