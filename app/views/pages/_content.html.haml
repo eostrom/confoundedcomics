@@ -1,0 +1,30 @@
+#content{:class => published_state(@page)}
+  #banner
+    = banner_link(@book)
+
+  #comic
+    = image_tag(@page.comic.url, :alt => h(@page.title))
+
+  -# TODO: make these look right on IE 7
+  %ul#page_nav
+    = nav_list_item('First', :first_predecessor)
+    = nav_list_item('Previous', :previous)
+    = nav_list_item('Next', :next)
+    = nav_list_item('Last', :last_successor)
+
+  #archive
+    %h2= link_to 'Archive', '#pages'
+    %ol#pages
+      - @pages.each do |page|
+        %li{:class => published_state(page)}
+          = link_to_unless page == @page, h(page.title), [@book, page]
+
+  #news
+    %p.date= @page.published_at
+    - if @page.commentary.present?
+      = simple_format(@page.commentary)
+
+- content_for :admin_nav do
+  %li= modal_link_to 'Edit page', edit_book_page_path(@book, @page)
+  %li= delete_page_link(@page)
+  %li= modal_link_to 'New page', new_book_page_path(@book)

@@ -1,0 +1,8 @@
+- content = render(:partial => 'content')
+
+= remotipart_response do
+  - if @page.to_param == params[:id]
+    $('#content').replaceWith('#{escape_javascript(content)}');
+    $.nyroModalRemove();
+  - else
+    window.location.replace('#{url_for [@book, @page]}');

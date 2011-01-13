@@ -93,6 +93,7 @@ Feature: Editing comics
       And I wait for the popup
       And I attach the local file "pictures/comic.jpg" to "Comic"
       And I press "Save"
+      And I wait for the popup to close
      Then I should be on an untitled page of "Book 1"
 
   @javascript
@@ -109,6 +110,7 @@ Feature: Editing comics
       And I attach the local file "pictures/comic.jpg" to "Comic"
       And I open the calendar for "Publish date" and click "1"
       And I press "Save"
+      And I wait for the popup to close
      Then I should be on an untitled page of "Book 1"
         # The first of the current month is never in the future, so...
       And the page should be published
@@ -143,6 +145,7 @@ Feature: Editing comics
       And I fill in "Title" with "Page the First"
       And I fill in "Publish date" with "2010-08-01"
       And I press "Save"
+      And I wait for the popup to close
      Then I should be on the page "Page the First"
       And the page should be published
 

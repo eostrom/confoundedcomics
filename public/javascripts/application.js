@@ -13,17 +13,6 @@ jQuery(function($) {
     }
   });
 
-  $('#nyroModalWrapper form')
-    .live('ajax:success', function(event, data, status, xhr) {
-      $('#content').replaceWith(data);
-      $.nyroModalRemove();
-    })
-    .live('ajax:error', function(event, xhr, status, error) {
-      var newForm = $(xhr.responseText).replaceAll($(this));
-      // var newForm = $(this).replaceWith(xhr.responseText);
-      $.nyroModalSettings({height: newForm.height()});
-    });
-
   $('#archive h2 a').click(function() {
     $('#archive #pages').show();
     return false;

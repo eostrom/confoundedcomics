@@ -1,0 +1,6 @@
+- form = render(:partial => 'form')
+- form_id = "##{dom_id(@page, @page.new_record? ? :new : :edit)}"
+
+= remotipart_response do
+  $('#{form_id}').replaceWith('#{escape_javascript(form)}');
+  $.nyroModalSettings({height: $('#{form_id}').height()});

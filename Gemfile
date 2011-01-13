@@ -36,6 +36,7 @@ gem 'devise', '~> 1.1.5'
 
 # comics stuff
 gem 'paperclip', '~> 2.3.8'
+gem 'remotipart', '~> 0.2.0'
 gem 'haml', '~> 3.0.16'
 gem 'friendly_id', '~> 3.1.7'
 gem 'formtastic', '~> 1.2.2'
