@@ -42,9 +42,14 @@ class PagesController < ApplicationController
     @page = @book.pages.build(params[:page])
 
     if @page.save
-      redirect_to [@book, @page]
+      if request.xhr?
+        @pages = @book.pages
+        render :action => 'show'
+      else
+        redirect_to [@book, @page]
+      end
     else
-      render :action => 'new'
+      render :action => 'new', :status => :unprocessable_entity
     end
   end
 
@@ -58,9 +63,14 @@ class PagesController < ApplicationController
     @page = Page.find(params[:id], :scope => @book)
 
     if @page.update_attributes(params[:page])
-      redirect_to [@book, @page]
+      if request.xhr?
+        @pages = @book.pages
+        render :action => 'show'
+      else
+        redirect_to [@book, @page]
+      end
     else
-      render :action => 'edit'
+      render :action => 'edit', :status => :unprocessable_entity
     end
   end
 

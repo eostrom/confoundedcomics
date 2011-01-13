@@ -23,7 +23,7 @@ When /^I wait for the popup to close$/ do
 end
 
 Then /^the page should be ([^ ]+)$/ do |state|
-  assert page.has_css?(".#{state}.content")
+  assert page.has_css?("#content.#{state}")
 end
 
 Then /^the "(.*)" link should be unpublished$/ do |text|

@@ -25,7 +25,7 @@ module PagesHelper
   end
 
   def page_form_for(page)
-    semantic_form_for([page.book, page],
+    semantic_form_for([page.book, page], :remote => true,
       :html => {:class => 'admin', :multipart => true}) do |form|
       yield form
     end
