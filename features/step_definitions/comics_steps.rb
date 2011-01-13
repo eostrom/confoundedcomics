@@ -16,9 +16,7 @@ end
 
 When /^I wait for the popup to close$/ do
   begin
-    wait_until { !page.find('#nyroModalContent').try(:visible?) }
-  rescue Capybara::ElementNotFound
-    # See above.
+    wait_until { page.has_no_css?('#nyroModalContent') }
   end
 end
 
