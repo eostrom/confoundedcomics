@@ -32,6 +32,13 @@ class PublishableTest < ActiveSupport::TestCase
 
     should('be valid') { assert @publishable.valid? }
 
+    should 'accept natural-language publish dates' do
+      Timecop.freeze do
+        @publishable.published_at_string = 'today'
+        assert_equal Date.today, @publishable.published_at
+      end
+    end
+
     context 'with a malformed date string' do
       setup { @publishable.published_at_string = 'asdaeae33' }
 
@@ -39,6 +46,36 @@ class PublishableTest < ActiveSupport::TestCase
         assert !@publishable.valid?
         assert @publishable.errors[:published_at_string]
       end
+    end
+  end
+
+  context 'A published Publishable' do
+    setup do
+      @publishable = Factory.create(:publishable,
+        :published_at => 1.day.ago)
+    end
+
+    should 'be visible to everyone' do
+      admin = Factory.create(:administrator)
+      assert @publishable.visible_to(admin)
+      assert PublishableTestable.visible_to(admin).find(@publishable)
+      assert @publishable.visible_to(nil)
+      assert PublishableTestable.visible_to(nil).include? @publishable
+    end
+  end
+
+  context 'An unpublished Publishable' do
+    setup do
+      @publishable = Factory.create(:publishable,
+        :published_at => 1.day.from_now)
+    end
+
+    should 'be visible only to administrators' do
+      admin = Factory.create(:administrator)
+      assert @publishable.visible_to(admin)
+      assert PublishableTestable.visible_to(admin).find(@publishable)
+      assert !@publishable.visible_to(nil)
+      assert !(PublishableTestable.visible_to(nil).include? @publishable)
     end
   end
 end
