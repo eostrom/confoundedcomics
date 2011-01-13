@@ -41,14 +41,17 @@ gem 'friendly_id', '~> 3.1.7'
 gem 'formtastic', '~> 1.2.2'
 gem 'chronic', '~> 0.3.0'
 
-# TODO: extract gems shared by test and cucumber
+# gems used for both test and cucumber environments
+def shared_testing_gems
+  gem 'factory_girl_rails', '~> 1.0'
+  gem 'faker', '~> 0.3.1'
+end
 
 group :test do
   gem 'shoulda', '~> 2.11.3'
-  gem 'factory_girl_rails', '~> 1.0'
-  gem 'faker', '~> 0.3.1'
   gem 'rr', '~> 1.0.2'
   gem 'timecop', '~> 0.3.5'
+  shared_testing_gems
 end
 
 group :cucumber do
@@ -58,6 +61,5 @@ group :cucumber do
   # gem 'capybara-envjs', '~> 0.4.0'
   # gem 'capybara-envjs-fixes', :git => 'git://github.com/rajatvig/capybara-envjs-fixes.git'
   # gem 'akephalos', :git => 'git://github.com/thoughtbot/akephalos.git'
-  gem 'factory_girl_rails', '~> 1.0'
-  gem 'faker', '~> 0.3.1'
+  shared_testing_gems
 end
