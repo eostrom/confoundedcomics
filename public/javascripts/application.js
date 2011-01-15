@@ -1,6 +1,5 @@
 jQuery(function($) {
   $('a.modal').nyroModal({
-    closeSelector: 'a.cancel',
     closeButton: '',
 
     endFillContent: function(modal, settings) {
@@ -11,6 +10,11 @@ jQuery(function($) {
           buttonImageOnly: true
         });
     }
+  });
+
+  $('#nyroModalContent a.cancel').live('click', function() {
+    $.nyroModalRemove();
+    return false;
   });
 
   $('#archive h2 a').click(function() {
