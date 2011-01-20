@@ -1,6 +1,7 @@
 !admin_bg = #cc88bb
 !admin_fg = white
 !admin_form_fg = #901172
+!admin_error_fg = #cc0000
 
 .unpublished
   background= !admin_bg
@@ -25,6 +26,20 @@
     margin: 1em 0 0
     li.general
       margin-top: 1em
+  &.flashes
+    margin: 0 25%
+    width: 50%
+    &.dismissable
+      position: absolute
+      top: 0
+    .flash
+      background-color= white
+      color= !admin_bg
+      -moz-border-radius: 0.5em
+      &.error, &.warning
+        color= !admin_error_fg
+    &.error, &.warning
+      background-color= !admin_error_fg
 
 form.formtastic.admin
   text-align: left

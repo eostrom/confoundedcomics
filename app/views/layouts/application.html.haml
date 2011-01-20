@@ -20,9 +20,11 @@
 
 
   %body
-    - [:notice, :warning, :alert].each do |section|
-      - if flash[section]
-        %div{:class => "flash #{section}"}= flash[section]
+    - sections = [:alert, :warning, :notice].select { |f| flash[f] }
+    - if sections.present?
+      %div{:class => "admin flashes #{sections.join(' ')}"}
+        - sections.each do |section|
+          %div{:class => "flash #{section}"}= flash[section]
 
     = yield
 
