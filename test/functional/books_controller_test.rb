@@ -44,24 +44,49 @@ class BooksControllerTest < ActionController::TestCase
     setup do
       @book = Factory.create(:book, :title => 'A Book',
         :published_at => 2.days.ago)
-      @published = Factory.create(:page, :book => @book,
-        :published_at => 2.days.ago)
-      @unpublished = Factory.create(:page, :book => @book,
-        :published_at => 2.days.from_now)
-      Factory.create(:page, :book => @book)
 
-      @params = {:id => @book.id}
+      @params = {:id => @book.to_param}
       @action = lambda { get :show, @params }
     end
 
-    context '(signed in)' do
-      setup { sign_in Factory.create(:administrator); @action.call }
-      # should redirect_to('the latest page') { @unpublished }
+    context '(no pages)' do
+      context '(signed in)' do
+        setup { sign_in Factory.create(:administrator); @action.call }
+        should redirect_to('the new page page') { new_book_page_url(@book) }
+      end
+
+      context '(signed out)' do
+        setup { sign_out :administrator; @action.call }
+        should redirect_to('the home page') { root_path }
+      end
     end
 
-    context '(signed out)' do
-      setup { sign_out :administrator; @action.call }
-      should redirect_to('the latest published page') { [@book, @published] }
+    context '(with pages)' do
+      setup do
+        @published = Factory.create(:page, :book => @book,
+          :published_at => 2.days.ago)
+        @unpublished = Factory.create(:page, :book => @book,
+          :published_at => 2.days.from_now)
+        Factory.create(:page, :book => @book)
+      end
+
+      context '(signed in)' do
+        setup { sign_in Factory.create(:administrator); @action.call }
+        should redirect_to('the latest page') { [@book, @unpublished] }
+      end
+
+      context '(signed out)' do
+        setup { sign_out :administrator; @action.call }
+        should redirect_to('the latest published page') { [@book, @published] }
+      end
+    end
+
+    context '(unpublished)' do
+      setup { @book.update_attribute(:published_at, 2.days.from_now) }
+      context '(signed out)' do
+        setup { sign_out :administrator; @action.call }
+        should redirect_to('the home page') { root_path }
+      end
     end
   end
 

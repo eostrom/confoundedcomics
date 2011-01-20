@@ -81,6 +81,16 @@ Feature: Editing comics
      Then I should be on the page "Page 1"
       And I should not see "Page 2"
 
+  Scenario: Create a book, then add pages later
+    Given I am signed in
+     When I go to the home page
+      And I follow "New book"
+      And I fill in "Title" with "Book 1"
+      And I press "Save"
+      And I go to the home page
+      And I follow "Book 1"
+     Then I should be on the new page page for "Book 1"
+
   @javascript
   Scenario: Add a page
     Given the following pages exist:

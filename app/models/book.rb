@@ -21,4 +21,9 @@ class Book < ActiveRecord::Base
   def style
     title && title.downcase.gsub(/\s+/, '_')
   end
+
+  scope :friendly_id_eq, lambda { |param|
+    name, sequence = param.parse_friendly_id
+    includes(:slugs).where(:slugs => {:name => name, :sequence => sequence})
+  }
 end

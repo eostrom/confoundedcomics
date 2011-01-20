@@ -6,13 +6,19 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.visible_to(current_administrator).find(params[:id])
-    @page = @book.pages.visible_to(current_administrator).latest
+    @book = Book.visible_to(current_administrator).
+      friendly_id_eq(params[:id]).first
+    @page = @book && @book.pages.visible_to(current_administrator).latest
 
-    redirect_to [@book, @page]
-  rescue ActiveRecord::RecordNotFound
-    "Can't find the book you're looking for. Try these books instead!"
-    redirect_to(root_url)
+    if @page
+      redirect_to [@book, @page]
+    elsif administrator_signed_in?
+      redirect_to new_book_page_url(@book)
+    else
+      flash[:error] =
+        "Can't find the book you're looking for. Try these books instead!"
+      redirect_to(root_url)
+    end
   end
 
   def new
