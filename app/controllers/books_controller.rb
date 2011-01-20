@@ -15,7 +15,7 @@ class BooksController < ApplicationController
     elsif administrator_signed_in?
       redirect_to new_book_page_url(@book)
     else
-      flash[:error] =
+      flash[:warning] =
         "Can't find the book you're looking for. Try these books instead!"
       redirect_to(root_url)
     end
