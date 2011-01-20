@@ -1,6 +1,10 @@
 Comics::Application.routes.draw do
   devise_for :administrators
 
+  devise_scope :administrator do
+    get "login", :to => "devise/sessions#new"
+  end
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
