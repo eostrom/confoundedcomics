@@ -2,7 +2,7 @@
 #
 #   * Update the library image (public/images/library.jpg).
 #   * Create the Scam model, below.
-#   * Add the coordinates to comics.sass.
+#   * Add the link coordinates to _library.sass.
 #
 # The ID of the HTML anchor will be based on the book title,
 # permalink-style.
