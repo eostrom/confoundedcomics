@@ -1,3 +1,13 @@
+=library_link(!left, !top, !width, !height, !lit = false)
+  left= !left
+  top= !top
+  width= !width
+  height= !height
+  @if !lit
+    &:hover
+      background-image= url(!lit)
+      background-position= #{-(!left)} #{-(!top)}
+
 #library
   width: 800px
   height: 585px
@@ -17,55 +27,31 @@
     // books on this site
 
     &#not-nowhere_link
-      top: 55px
-      left: 108px
-      height: 191px
-      width: 45px
+      +library_link(108px, 55px, 45px, 191px, "/images/library_lit1.jpg")
 
     &#circus-season_link
-      top: 104px
-      left: 576px
-      height: 149px
-      width: 71px
+      +library_link(576px, 104px, 71px, 149px, "/images/library_lit1.jpg")
 
     // books found elsewhere (see app/models/book_link.rb)
 
     &#shark-book_link
-      top: 172px
-      left: 113px
-      height: 73px
-      width: 83px
+      +library_link(172px, 112px, 27px, 173px, "/images/library_lit1.jpg")
 
     &#san-jose-ill-keep-you_link
-      top: 308px
-      left: 620px
-      height: 200px
-      width: 60px
+      +library_link(620px, 308px, 60px, 200px, "/images/library_lit1.jpg")
 
     // static links
 
     &#home_link
-      top: 269px
-      left: 46px
-      height: 239px
-      width: 28px
+      +library_link(46px, 269px, 28px, 239px, "/images/library_lit2.jpg")
 
     &#contact_link
-      top: 260px
-      left: 76px
-      height: 248px
-      width: 31px
+      +library_link(76px, 260px, 31px, 248px, "/images/library_lit1.jpg")
 
     &#store_link
-      top: 270px
-      left: 107px
-      height: 233px
-      width: 33px
+      +library_link(107px, 270px, 33px, 233px, "/images/library_lit2.jpg")
 
     // Links:(283, 140), (508, 170)
 
     &#donate_link
-      top: 338px
-      left: 564px
-      height: 50px
-      width: 35px
+      +library_link(564px, 338px, 35px, 50px, false)
