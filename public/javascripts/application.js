@@ -1,4 +1,6 @@
 jQuery(function($) {
+  $('a#donate_link').click(function() { $('.tips form').submit(); return false; });
+
   $('a.modal').nyroModal({
     closeButton: '',
 

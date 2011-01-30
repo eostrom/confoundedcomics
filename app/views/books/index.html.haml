@@ -1,6 +1,15 @@
-%ol.books
-  - @books.each do |book|
-    %li= link_to h(book.title), book_path(book)
+#library
+  #new_arrival
+
+  %ol.books
+    - @books.each do |book|
+      %li= link_to h(book.title), book, :id => "#{book.to_param}_link"
+
+  %ol.nav
+    %li= link_to 'Home', 'http://confoundedcontraption.com/', :id => 'home_link'
+    %li= link_to 'Contact', 'mailto:kate@confoundedcontraption.com', :id => 'contact_link'
+    %li= link_to 'Store', 'http://katesaturday.etsy.com/', :id => 'store_link'
+    %li= link_to 'Donate', '#', :id => 'donate_link'
 
 - content_for :admin_nav do
   %li= link_to 'New book', new_book_path
