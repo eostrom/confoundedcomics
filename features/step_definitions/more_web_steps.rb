@@ -12,3 +12,9 @@ Then /^"(.*)" should not be a link$/ do |content|
   # assert !all('a[href]').any? { |a| puts a.inspect; content == a.content }
   assert page.has_no_xpath?("//a[href][.='#{content}']")
 end
+
+Then /^"(.*)" should link to "(.*)"$/ do |text, url|
+  links = all("a", :text => text)
+  assert links.present?, "No link with text '#{text}'"
+  assert links.any? { |node| node['href'] == url }
+end

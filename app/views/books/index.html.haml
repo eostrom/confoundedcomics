@@ -5,6 +5,10 @@
     - @books.each do |book|
       %li= link_to h(book.title), book, :id => "#{book.to_param}_link"
 
+  %ol.book_links
+    - BookLink.each do |link|
+      %li= link_to h(link.title), link.url, :id => "#{link.to_param}_link"
+
   %ol.nav
     %li= link_to 'Home', 'http://confoundedcontraption.com/', :id => 'home_link'
     %li= link_to 'Contact', 'mailto:kate@confoundedcontraption.com', :id => 'contact_link'

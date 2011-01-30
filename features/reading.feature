@@ -3,6 +3,10 @@ Feature: Reading comics!
   A comics fan
   wants to read comics
 
+  Scenario: Home page links
+     When I am on the home page
+     Then "San Jose: I'll Keep You" should link to "http://www.smackjeeves.com/comicprofile.php?id=73148"
+
   Scenario: Read a page
     Given the following books exist:
         | Title  | Banner file name | Published At |

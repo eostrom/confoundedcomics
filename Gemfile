@@ -41,6 +41,7 @@ gem 'haml', '~> 3.0.16'
 gem 'friendly_id', '~> 3.1.7'
 gem 'formtastic', '~> 1.2.2'
 gem 'chronic', '~> 0.3.0'
+gem 'scam', '~> 0.2'
 
 # gems used for both test and cucumber environments
 def shared_testing_gems
