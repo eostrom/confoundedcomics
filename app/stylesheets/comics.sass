@@ -24,11 +24,11 @@ body
   li
     +inline-block
   a
-    opacity: 0.1
+    +opacity(0.1)
   a:link, a:visited
-    opacity: 1
+    +opacity(1)
     &:hover
-      opacity: 0.7
+      +opacity(0.7)
 
 #archive
   width: 250px
@@ -93,7 +93,7 @@ ul#site_nav
       text-decoration: none
       color= !site_text
       &:hover
-        opacity: 0.7
+        +opacity(0.7)
     form
       // for IE 7
       margin: 0

@@ -16,4 +16,10 @@
   zoom: 1
   *display: inline
 
+// https://gist.github.com/214274
+=opacity(!value)
+  :opacity= !value
+  :-ms-filter "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{!value*100})"
+  :filter alpha(opacity=#{!value * 100})
+
 !site_text = #888
